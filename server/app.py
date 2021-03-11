@@ -14,8 +14,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
-
 # ! Hello world flask app to start you off. Replace this with blueprints and routers and so on.
+
+
 @app.route('/api')
 def index():
-    return { 'message': "Hello, World!" }
+    return {'message': "Hello, World!"}
