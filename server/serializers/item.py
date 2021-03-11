@@ -10,11 +10,3 @@ class ItemSchema(ma.SQLAlchemyAutoSchema):
 
     # ! Add my user schema
     user = fields.Nested('UserSchema')
-
-# ! Add another cake schema that is not populated.
-
-
-class SimpleItemSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Item
-        load_instance = True

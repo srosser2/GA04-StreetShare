@@ -1,11 +1,13 @@
+from app import app, db
+
+from models.user import User
+from models.category import Category
+from models.item import Item
+from models.thread import Thread
+
 from data.thread_data import generate_threads
 from data.user_data import user_data
 from data.item_data import generate_items, generate_categories
-from models.thread import Thread
-from models.user import User
-from models.category import Category
-from app import app, db
-from models.item import Item
 
 
 with app.app_context():

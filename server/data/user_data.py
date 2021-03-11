@@ -8,7 +8,7 @@ user_data = [
         address='180A Brick lane',
         profile_pic='http://placeimg.com/640/480/people',
         rating='good',
-        password_hash='123'
+        password='123'
     ),
     User(
         first_name='Nikki',
@@ -17,7 +17,7 @@ user_data = [
         address='100 Brick lane',
         profile_pic='http://placeimg.com/640/480/people',
         rating='not good',
-        password_hash='123'
+        password='123'
 
     ),
     User(
@@ -27,7 +27,7 @@ user_data = [
         address='70 Brick lane',
         profile_pic='http://placeimg.com/640/480/people',
         rating='good',
-        password_hash='123'
+        password='123'
 
     ),
     User(
@@ -37,7 +37,7 @@ user_data = [
         address='10 Brick lane',
         profile_pic='http://placeimg.com/640/480/people',
         rating='good',
-        password_hash='123'
+        password='123'
 
     )
 ]

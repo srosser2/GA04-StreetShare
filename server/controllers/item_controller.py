@@ -12,15 +12,14 @@ router = Blueprint(__name__, 'items')
 @router.route("/items", methods=["GET"])
 def get_all_items():
     items = Item.query.all()
-    return {"message": "hello"},
-    # return item_schema.jsonify(items, many=True), 200
+    return item_schema.jsonify(items, many=True), 200
 
 
 @router.route("/items.<int:item_id>", methods=["Get"])
 def get_single_item(item_id):
     item = Item.query.get(item_id)
     if not item_id:
-        return {"message": "Cake not found"}, 404
+        return {"message": "Item not found"}, 404
     return item_schema.jsonify(item), 200
 
 
@@ -61,4 +60,4 @@ def remove_cake(item_id):
     if item.user != g.current_user:
         return {'errors': 'This is not your cake!'}, 402
     item.remove()
-    return {"message": "Cake deleted successfully"}, 200
+    return {"message": "Item deleted successfully"}, 200
