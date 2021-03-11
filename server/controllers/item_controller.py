@@ -1,5 +1,7 @@
 from flask import Blueprint, request, g
+import json
 from models.item import Item
+from models.category import Category
 from serializers.item import ItemSchema
 from serializers.category import CategorySchema
 from decorators.secure_route import secure_route
@@ -29,10 +31,9 @@ def get_single_item(item_id):
 @secure_route
 def create_item():
     item_dictionary = request.json
-
     try:
         item = item_schema.load(item_dictionary)
-        item.user = g.current_user
+        item.user_id = g.current_user.id
     except ValidationError as e:
         return {"errors": e.messages, "messages": "Something went wrong"}
     item.save()
@@ -59,7 +60,7 @@ def update_ite(item_id):
 @secure_route
 def remove_cake(item_id):
     item = Item.query.get(item_id)
-    if item.user != g.current_user:
+    if item.user_id != g.current_user.id:
         return {'errors': 'This is not your cake!'}, 402
     item.remove()
     return {"message": "Item deleted successfully"}, 200
