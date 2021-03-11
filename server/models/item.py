@@ -10,7 +10,6 @@ class Item(db.Model, BaseModel):
 
     title = db.Column(db.String(40), nullable=False, unique=False)
     category = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=True)
-    # category = db.relationship('Category', backref='items')
     description = db.Column(db.String(500), nullable=True)
     note = db.Column(db.String(200), nullable=True)
     image = db.Column(db.Text, nullable=False)
