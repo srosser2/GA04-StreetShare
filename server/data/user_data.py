@@ -1,6 +1,6 @@
 from models.user import User
 
-list_users = [
+user_data = [
     User(
         first_name='Crystel',
         last_name='Osinski',

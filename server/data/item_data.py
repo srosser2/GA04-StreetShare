@@ -1,6 +1,6 @@
 from models.item import Item
 
-list_items = [
+item_data = [
     Item(
         title='Circle saw',
         category='diy',

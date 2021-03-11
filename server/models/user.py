@@ -1,9 +1,6 @@
 from app import db, bcrypt
-<<<<<<< HEAD
 from models.base import BaseModel
-=======
 from config.environment import secret
->>>>>>> development
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import *
 import jwt
