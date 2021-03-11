@@ -1,17 +1,13 @@
 from app import db, bcrypt
-<<<<<<< HEAD
 from models.base import BaseModel
-=======
 from config.environment import secret
->>>>>>> development
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import *
 import jwt
 
 from models.base import BaseModel
 from models.users_threads import users_threads_join
-
-
+from models.item import Item
 
 
 class User(db.Model, BaseModel):
@@ -25,14 +21,11 @@ class User(db.Model, BaseModel):
     profile_pic = db.Column(db.String(200), nullable=True)
     rating = db.Column(db.String(200), nullable=True)
     password_hash = db.Column(db.String(128), nullable=True)
-    threads = db.relationship('Thread', backref='users', secondary=users_threads_join)
-    messages = db.relationship('Message', backref='users')
-
-    # ? Create a relationship field to comments
-    # notification = db.relationship(
-    #     'Notification', backref='user', cascade="all, delete")
-    # ? Create a relationship field to cakes
-    # message = db.relationship('Message', backref='user', cascade="all, delete")
+    threads = db.relationship(
+        'Thread', backref='users', secondary=users_threads_join)
+    messages = db.relationship(
+        'Message', backref='users', cascade="all, delete")
+    items = db.relationship('Item', backref='users', cascade="all, delete")
 
     # ! The equivalent of a virtual field in sqlalchemy
     # ! This is a temporary field that should be not be saved in db
