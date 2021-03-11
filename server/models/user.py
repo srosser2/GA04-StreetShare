@@ -1,5 +1,6 @@
 from app import db, bcrypt
 from models.base import BaseModel
+from models.thread import Thread
 from config.environment import secret
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import *
@@ -14,10 +15,10 @@ class User(db.Model, BaseModel):
 
     __tablename__ = 'users'
 
-    first_name = db.Column(db.String(20), nullable=False, unique=True)
-    last_name = db.Column(db.String(20), nullable=False, unique=True)
+    first_name = db.Column(db.String(20), nullable=False)
+    last_name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.Text, nullable=False, unique=True)
-    address = db.Column(db.Text, nullable=False, unique=True)
+    address = db.Column(db.Text, nullable=False)
     profile_pic = db.Column(db.String(200), nullable=True)
     rating = db.Column(db.String(200), nullable=True)
     password_hash = db.Column(db.String(128), nullable=True)
