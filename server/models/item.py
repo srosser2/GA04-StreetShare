@@ -3,11 +3,11 @@ from models.base import BaseModel
 from models.user import User
 
 
-class Cake(db.Model, BaseModel):
+class Item(db.Model, BaseModel):
 
     __tablename__ = "item"
 
-    title = db.Column(db.String(40), nullable=False, unique=True)
+    title = db.Column(db.String(40), nullable=False, unique=False)
     category = db.Column(db.String(40), nullable=False)
     description = db.Column(db.String(200), nullable=True)
     note = db.Column(db.String(200), nullable=True)

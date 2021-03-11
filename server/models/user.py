@@ -1,5 +1,4 @@
 from app import db, bcrypt
-
 from models.base import BaseModel
 from sqlalchemy.ext.hybrid import hybrid_property
 import jwt
@@ -11,7 +10,8 @@ class User(db.Model, BaseModel):
 
     __tablename__ = 'users'
 
-    username = db.Column(db.String(15), nullable=False, unique=True)
+    first_name = db.Column(db.String(20), nullable=False, unique=True)
+    last_name = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.Text, nullable=False, unique=True)
     address = db.Column(db.Text, nullable=False, unique=True)
     profile_pic = db.Column(db.String(200), nullable=True)
