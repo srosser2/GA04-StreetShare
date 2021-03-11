@@ -10,3 +10,4 @@ class ItemSchema(ma.SQLAlchemyAutoSchema):
 
     # ! Add my user schema
     user = fields.Nested('UserSchema')
+    category = fields.Nested('CategorySchema')

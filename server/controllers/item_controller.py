@@ -1,10 +1,12 @@
 from flask import Blueprint, request, g
 from models.item import Item
 from serializers.item import ItemSchema
+from serializers.category import CategorySchema
 from decorators.secure_route import secure_route
 from marshmallow.exceptions import ValidationError
 
 item_schema = ItemSchema()
+category_schema = CategorySchema()
 
 router = Blueprint(__name__, 'items')
 
@@ -15,7 +17,7 @@ def get_all_items():
     return item_schema.jsonify(items, many=True), 200
 
 
-@router.route("/items.<int:item_id>", methods=["Get"])
+@router.route("/items/<int:item_id>", methods=["GET"])
 def get_single_item(item_id):
     item = Item.query.get(item_id)
     if not item_id:
