@@ -22,7 +22,7 @@ def get_all_items():
 @router.route("/items/<int:item_id>", methods=["GET"])
 def get_single_item(item_id):
     item = Item.query.get(item_id)
-    if not item_id:
+    if not item:
         return {"message": "Item not found"}, 404
     return item_schema.jsonify(item), 200
 
@@ -41,7 +41,7 @@ def create_item():
 
 
 @router.route("/items/<int:item_id>", methods=["PUT"])
-def update_ite(item_id):
+def update_item(item_id):
     existing_item = Item.query.get(item_id)
     item_dictionary = request.json
     try:
@@ -58,9 +58,9 @@ def update_ite(item_id):
 
 @router.route("/items/<int:item_id>", methods=["DELETE"])
 @secure_route
-def remove_cake(item_id):
+def remove_item(item_id):
     item = Item.query.get(item_id)
     if item.user_id != g.current_user.id:
-        return {'errors': 'This is not your cake!'}, 402
+        return {'errors': 'This is not your item!'}, 402
     item.remove()
     return {"message": "Item deleted successfully"}, 200

@@ -22,8 +22,7 @@ class User(db.Model, BaseModel):
     profile_pic = db.Column(db.String(200), nullable=True)
     rating = db.Column(db.String(200), nullable=True)
     password_hash = db.Column(db.String(128), nullable=True)
-    threads = db.relationship(
-        'Thread', backref='users', secondary=users_threads_join)
+    # threads = db.relationship('Thread', backref='users', secondary=users_threads_join)
     messages = db.relationship(
         'Message', backref='users', cascade="all, delete")
     items = db.relationship('Item', backref='users', cascade="all, delete")
