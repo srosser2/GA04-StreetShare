@@ -1,4 +1,5 @@
 from flask import Blueprint, request, g
+from decorators.secure_route import secure_route
 from models.thread import Thread
 from models.message import Message
 

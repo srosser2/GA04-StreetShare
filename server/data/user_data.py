@@ -2,6 +2,15 @@ from models.user import User
 
 user_data = [
     User(
+        first_name='Sam',
+        last_name='Rosser',
+        email='samr@samr.com',
+        address='15 Brick lane',
+        profile_pic='http://placeimg.com/640/480/people',
+        rating='good',
+        password='samr1234'
+    ),
+    User(
         first_name='Crystel',
         last_name='Osinski',
         email='crystel@gmail.com',
