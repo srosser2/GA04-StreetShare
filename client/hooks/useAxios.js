@@ -9,7 +9,7 @@ const useAxios = (url, method, body, headers) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseData = await axios.get(url, body, headers)
+        const responseData = await axios[method](url, body, headers)
 
         if (responseData) {
           setLoading(false)
