@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a389dd1624ca9fc5beaa4288f9ff79b546edc02a1c7cdaf8dcb292ab2a2feaa8"
+            "sha256": "a798d350b776b381bd791f1020db10caf624e01f28f34fee3a22e227f4d98c80"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,6 +28,12 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==3.2.0"
+        },
+        "blinker": {
+            "hashes": [
+                "sha256:471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
+            ],
+            "version": "==1.4"
         },
         "certifi": {
             "hashes": [
@@ -107,6 +113,13 @@
             ],
             "index": "pypi",
             "version": "==0.7.1"
+        },
+        "flask-mail": {
+            "hashes": [
+                "sha256:22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"
+            ],
+            "index": "pypi",
+            "version": "==0.9.1"
         },
         "flask-marshmallow": {
             "hashes": [
@@ -271,12 +284,27 @@
             "index": "pypi",
             "version": "==2.0.1"
         },
+        "python-http-client": {
+            "hashes": [
+                "sha256:67e6a7bea19b03e14dc971480d3531b80becfc203d6c69478561bf7844d52661"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==3.3.2"
+        },
+        "sendgrid": {
+            "hashes": [
+                "sha256:2eb1dcb1f7d8656eed4db586e428c2c86f347590b8511d7f92993882d0e4fab9",
+                "sha256:e422c8263563ac7d664066d2f87b90bcb005b067eb7c33a9b1396442b2ed285b"
+            ],
+            "index": "pypi",
+            "version": "==6.6.0"
+        },
         "six": {
             "hashes": [
                 "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
                 "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==1.15.0"
         },
         "sqlalchemy": {
@@ -322,6 +350,12 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.3.23"
+        },
+        "starkbank-ecdsa": {
+            "hashes": [
+                "sha256:423f81bb55c896a3c85ee98ac7da98826721eaee918f5c0c1dfff99e1972da0c"
+            ],
+            "version": "==1.1.0"
         },
         "urllib3": {
             "hashes": [
@@ -385,7 +419,7 @@
                 "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1",
                 "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"
             ],
-            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==2.4.7"
         },
         "pytest": {
@@ -401,7 +435,7 @@
                 "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b",
                 "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"
             ],
-            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==0.10.2"
         }
     }
