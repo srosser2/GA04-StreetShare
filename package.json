@@ -29,7 +29,10 @@
   "dependencies": {
     "axios": "^0.21.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.5.2",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-hook-form": "^6.15.4",
+    "react-router-dom": "^5.2.0",
+    "react-select": "^4.2.1"
   }
 }
