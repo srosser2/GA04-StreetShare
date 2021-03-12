@@ -3,12 +3,17 @@ import { BrowserRouter, Switch, Link, Route } from 'react-router-dom'
 import './styles/style.scss'
 import axios from 'axios'
 
+import Profile from './containers/profile'
+import Login from './containers/login'
+
 // ! Some starter code for your frontend, change this
 // ! however you like.
 const App = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/profile/:id" component={Profile} />
       <Route exact path="/test/backend" component={TestBackend} />
     </Switch>
   </BrowserRouter>
