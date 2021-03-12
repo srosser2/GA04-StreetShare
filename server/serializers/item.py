@@ -9,7 +9,6 @@ class ItemSchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
 
     # ! Add my user schema
-    user_id = fields.Nested('UserSchema')
+    user_id = fields.Integer(data_key='user_id')
     # category = fields.Nested('CategorySchema')
     category = fields.Integer(data_key='category')
-    
