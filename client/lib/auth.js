@@ -1,4 +1,4 @@
-export function getLoggedInUserId() {
+export function getLoggedInUser() {
   if (!localStorage) return false
   const token = localStorage.getItem('token')
   if (!token) return false
