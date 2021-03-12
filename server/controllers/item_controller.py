@@ -17,12 +17,12 @@ router = Blueprint(__name__, 'items')
 def get_all_items():
     items = Item.query.all()
     return item_schema.jsonify(items, many=True), 200
-    
+
 
 @router.route("/items/<int:item_id>", methods=["GET"])
 def get_single_item(item_id):
     item = Item.query.get(item_id)
-    if not item_id:
+    if not item:
         return {"message": "Item not found"}, 404
     return item_schema.jsonify(item), 200
 
