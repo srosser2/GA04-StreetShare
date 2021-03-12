@@ -13,4 +13,5 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 	first_name = fields.String(data_key='firstName')
 	last_name = fields.String(data_key='lastName')
 	# threads = fields.Nested('ThreadSchema', many=True)
+	files = fields.Nested('FileSchema', many=True)
 	password = fields.String(required=True)

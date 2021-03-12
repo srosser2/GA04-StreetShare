@@ -7,4 +7,4 @@ class File(db.Model, BaseModel):
     
     url = db.Column(db.String(200), nullable=False)
     cloud_id = db.Column(db.String(200), nullable=False)
-    # user_id = db
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

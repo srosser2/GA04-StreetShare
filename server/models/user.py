@@ -1,6 +1,7 @@
 from app import db, bcrypt
 from models.base import BaseModel
 from models.thread import Thread
+from models.file import File
 from config.environment import secret
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import *
@@ -26,6 +27,7 @@ class User(db.Model, BaseModel):
     messages = db.relationship(
         'Message', backref='users', cascade="all, delete")
     items = db.relationship('Item', backref='users', cascade="all, delete")
+    files = db.relationship('File', backref='users', cascade="all, delete")
 
     # ! The equivalent of a virtual field in sqlalchemy
     # ! This is a temporary field that should be not be saved in db
