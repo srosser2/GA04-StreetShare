@@ -3,6 +3,10 @@ import { BrowserRouter, Switch, Link, Route } from 'react-router-dom'
 import './styles/style.scss'
 import axios from 'axios'
 
+//importing Components
+import Brows from './containers/brows'
+
+
 // ! Some starter code for your frontend, change this
 // ! however you like.
 const App = () => (
@@ -10,7 +14,9 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/test/backend" component={TestBackend} />
+
     </Switch>
+    <Brows />
   </BrowserRouter>
 )
 
