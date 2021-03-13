@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import axios from 'axios'
+import 'bulma'
 
 import { getLoggedInUser } from '../lib/auth'
 import useAxios from '../hooks/useAxios'
@@ -37,6 +38,9 @@ const Profile = ({ match }) => {
   })
 
   return <div>
+    <figure className="image is-3by2 mb-2">
+      <img src={results.profilePic} alt={results.lastName} />
+    </figure>
     <h1>{results.firstName} {results.lastName}</h1>
     <h2>{results.address}</h2>
     {userItems}

@@ -6,6 +6,7 @@ import 'bulma'
 const Brows = () => {
 
   const [items, updateItems] = useState([])
+  const [users, updateUser] = useState([])
   const [toggle, updateToggle] = useState(false)
   const [sideCard, revealSideCard] = useState(false)
   const [selectedItem, updateselectedItem] = useState({
@@ -25,7 +26,6 @@ const Brows = () => {
       title: title,
       category: category,
       note: note,
-      facilities: facilities,
       description: description,
       image: image,
       user_id: user_id,
@@ -38,12 +38,17 @@ const Brows = () => {
   }
 
   useEffect(() => {
-    axios.get('/api/items')
-      .then(axiosRes => {
-        updateItems(axiosRes.data)
-        console.log(axiosRes.data)
-      })
+    const reqOne = axios.get('/api/items')
+    const reqTwo = axios.get('/api/users')
+    axios.all([reqOne, reqTwo])
+      .then(axios.spread((...responses) => {
+        console.log(responses[0])
+        console.log(responses[1])
+        updateItems(responses[0].data)
+        updateUser(responses[1].data)
+      }))
   }, [])
+
   return (
     <main>
       <div className='toggle-container'>
@@ -57,14 +62,22 @@ const Brows = () => {
               <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
                 <div className="columns is-multiline">
                   {items.map((item) => {
-                    return <div key={item._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
+                    return <div key={item.id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
                       <div className="card cardHeight" id={selectedItem.id === item.id ? 'selected' : 'cardHover'} onClick={() => handleSelectedItem(item)}>
                         <div className="card-content">
                           <div className="media">
                             <div className="media-content">
                               <p className="title is-4 titleHeight">{item.title}</p><br></br>
-                              <p className="subtitle is-6">Categor y{item.category}</p>
-                              <p className="subtitle is-6">Owner: {item.user_id}</p>
+                              <p className="subtitle is-6">Category {item.category}</p>
+                              {users.map((user) => {
+                                if (user.id === item.user_id) {
+                                  return <div key={user.id}>
+                                    <p className="subtitle is-6">Owner: {user.firstName + ' ' + user.lastName}</p>
+                                    <p className="subtitle is-6">Address: {user.address}</p>
+                                    <p className="subtitle is-6">Rating: {user.rating}</p><br></br>
+                                  </div>
+                                }
+                              })}
                               <p className="subtitle is-6">Note: {item.note}</p>
                               <p className="subtitle is-6">Description: {item.description}</p>
                               <figure className="image is-3by2 mb-2">
