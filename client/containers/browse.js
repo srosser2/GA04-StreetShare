@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Map from '../components/map'
 import 'bulma'
 
-const Brows = () => {
+const Browse = () => {
 
   const [items, updateItems] = useState([])
   const [users, updateUser] = useState([])
@@ -124,4 +124,4 @@ const Brows = () => {
   )
 }
 
-export default Brows
+export default Browse

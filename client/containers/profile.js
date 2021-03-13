@@ -28,22 +28,30 @@ const Profile = ({ match }) => {
   }
 
   const userItems = results.items.map(item => {
-    return <div key={item.id}>
-      {loggedInUser}
-      <h4>{item.title}</h4>
-      <p>{item.category}</p>
-      <p>{item.description}</p>
-      <img src={item.image} />
+    return <div key={item.id} className={'card'}>
+      <div className={'card-image-container'}>
+        <img src={item.image} />
+      </div>
+      <div className={'card-description-container'}>
+        <h4>{item.title}</h4>
+        <p>{item.description}</p>
+      </div>
     </div>
   })
 
   return <div>
-    <figure className="image is-3by2 mb-2">
-      <img src={results.profilePic} alt={results.lastName} />
-    </figure>
-    <h1>{results.firstName} {results.lastName}</h1>
-    <h2>{results.address}</h2>
-    {userItems}
+        <figure className="image is-3by2 mb-2">
+          <img src={results.profilePic} alt={results.lastName} />
+        </figure>
+        <div className={'container'}>
+          <h1>{results.firstName} {results.lastName}</h1>
+          <h2>{results.address}</h2>
+
+          <div className={'card-container'}>
+            {userItems}
+          </div>
+        </div>
+
   </div>
 }
 

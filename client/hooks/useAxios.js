@@ -7,7 +7,7 @@ const useAxios = (url, method, body, headers) => {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    const fetchData = async () => {
+    const makeRequest = async () => {
       try {
         const responseData = await axios[method](url, body, headers)
 
@@ -23,7 +23,7 @@ const useAxios = (url, method, body, headers) => {
       setLoading(false)
     }
 
-    fetchData()
+    makeRequest()
   }, [url])
 
   return {

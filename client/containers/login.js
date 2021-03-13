@@ -68,6 +68,7 @@ const Login = ({ history }) => {
   }
 
   return <div>
+    <h1>test</h1>
     <Form
       config={loginForm}
       controls={formControls}

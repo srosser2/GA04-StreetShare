@@ -1,0 +1,110 @@
+$light-grey: #f3f3f4;
+
+
+// Navbar
+
+.navbar-container ul {
+  list-style: none;
+  display: flex;
+}
+
+.navbar-container li {
+  margin-left: 20px;
+}
+
+// Card
+
+.card {
+  diplay: flex;
+  flex-direction: column;
+  flex-basis: 33%;
+  border: 1px solid #ececec;
+  margin: 5px;
+}
+
+.card-image-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-image-container img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.card-description-container {
+  padding: 15px;
+}
+
+// Thread Card
+
+.thread-card {
+  display: flex;
+  align-items: center;
+}
+
+.thread-card-avatar {
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+}
+
+.thread-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.thread-card-content h4, 
+.thread-card-content p {
+  line-height: 150%;
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+// Messages
+
+.message-card {
+  display: flex;
+  margin: 10px;
+}
+
+.message-card-avatar {
+  height: 40px;
+  width: 40px;
+  margin: 10px;
+}
+
+.message-card-content {
+  flex-grow: 1;
+  // background-color: $light-grey;
+  padding: 10px 20px;
+}
+
+
+// Message input
+
+.message-form {
+  
+}
+
+.message-text-input {
+
+}
+
+
+// Avatar
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
+
+.message-card-avatar .avatar {
+  height: 40px;
+  width: 40px;
+}
