@@ -60,7 +60,7 @@ def login():
         return {'message': 'User not found'}
 
     if not user.validate_password(user_dict['password']):
-        return {'message': 'Unauthorized: incorrect password'}, 402
+        return {'message': 'Unauthorized: incorrect password'}, 401
 
     token = user.generate_token()
 
