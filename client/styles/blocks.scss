@@ -1,0 +1,55 @@
+$light-grey: #f3f3f4;
+
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid $light-grey;
+  padding: 0 30px;
+  background-color: #fff;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.inbox-container {
+  display: flex;
+  min-height: 75vh;
+  border: 1px solid $light-grey;
+}
+
+.inbox-thread-container {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 30%;
+  flex-grow: 1;
+}
+
+.inbox-messages-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  flex-basis: 70%;
+  border: 1px solid coral;
+}
+
+.inbox-message-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inbox-message-input-container {
+  border: 1px solid grey;
+  display: flex;
+  padding: 10px;
+}
