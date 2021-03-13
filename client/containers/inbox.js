@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import useAxios from '../hooks/useAxios'
 
 import blankAvatar from '../assets/blank-avatar.png'
 import Form from '../components/form'
 
-const Inbox = ({ history }) => {
+const Inbox = ({ history, match }) => {
+
+  // const { loading, results, error } = useAxios(`/api/users/${match.params.id}`, 'get')
 
   const [messageForm, updateMessageForm] = useState({
     message: {
@@ -99,7 +102,7 @@ const Inbox = ({ history }) => {
 
           <div className={'message-card'} >
             <div className={'message-card-avatar'}>
-              <img src={blankAvatar} className={'avatar'}/>
+              {/* <img src={blankAvatar} className={'avatar'}/> */}
             </div>
             <div className={'message-card-content'}>
               <h4>Sam Rosser - 5 mins ago</h4>
@@ -109,7 +112,7 @@ const Inbox = ({ history }) => {
 
           <div className={'message-card'} >
             <div className={'message-card-avatar'}>
-              <img src={blankAvatar} className={'avatar'}/>
+              {/* <img src={blankAvatar} className={'avatar'}/> */}
             </div>
             <div className={'message-card-content'}>
               <h4>Sam Rosser - 5 mins ago</h4>

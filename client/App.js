@@ -8,7 +8,7 @@ import './styles/modifiers.scss'
 import axios from 'axios'
 
 //importing Components
-import Brows from './containers/brows'
+import Browse from './containers/browse'
 
 import Profile from './containers/profile'
 import Login from './containers/login'
@@ -28,9 +28,10 @@ const App = () => (
       <Route exact path="/profile/:id" component={Profile} />
       <Route exact path="/inbox" component={Inbox} />
       <Route exact path="/test/backend" component={TestBackend} />
+      <Route exact path='/browse' component={Browse} />
 
     </Switch>
-    <Brows />
+    
   </BrowserRouter>
 )
 

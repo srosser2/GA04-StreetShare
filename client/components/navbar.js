@@ -11,6 +11,7 @@ const NavBar = ({ history }) => {
       <ul className={'nav-links-container'}>
         <li><NavLink to={'/inbox'}>Inbox</NavLink></li>
         <li><NavLink to={'/profile/1'}>Profile</NavLink></li>
+        <li><NavLink to={'/browse'}>Browse</NavLink></li>
       </ul>
     </div>
   </div>
