@@ -9,7 +9,7 @@ const Profile = ({ match }) => {
 
   const currentUser = getLoggedInUser()
 
-  const { loading, results, error } = useAxios(`/api/users/${match.params.id}`, 'get')
+  const { loading, results, error } = useAxios({ url: `/api/users/${match.params.id}`, method: 'get'})
 
   // Display something while loading
   if (loading) {
