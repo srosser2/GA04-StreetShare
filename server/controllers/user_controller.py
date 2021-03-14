@@ -1,28 +1,32 @@
 from flask import Blueprint, request, g
+
+router = Blueprint('user_controller', __name__)
+
+from marshmallow.exceptions import ValidationError
+
 from models.user import User
 # from models.thread import Thread
 from serializers.user import UserSchema
-from serializers.thread import ThreadSchema
-from marshmallow.exceptions import ValidationError
+# from serializers.thread import ThreadSchema
 # sending confirmation email
-import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-from flask_mail import Mail, Message
+# import os
+# from sendgrid import SendGridAPIClient
+# from sendgrid.helpers.mail import Mail
+# from flask_mail import Mail, Message
 from decorators.secure_route import secure_route
 
 # ends here
 user_schema = UserSchema()
-thread_schema = ThreadSchema()
+# thread_schema = ThreadSchema()
 
-router = Blueprint(__name__, 'users')
+
 
 
 @router.route('/register', methods=['POST'])
 def register():
     user_dict = request.json
 
-    try:
+    try: 
         user = user_schema.load(user_dict)
 
     except ValidationError as e:

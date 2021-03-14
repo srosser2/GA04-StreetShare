@@ -1,12 +1,12 @@
 from flask import Blueprint, request, g
 from models.category import Category
 from serializers.category import CategorySchema
-from decorators.secure_route import secure_route
 from marshmallow.exceptions import ValidationError
 
-category_schema = CategorySchema()
-
 router = Blueprint(__name__, 'category')
+
+
+category_schema = CategorySchema()
 
 
 @router.route("/categories", methods=["GET"])

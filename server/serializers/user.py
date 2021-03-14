@@ -15,5 +15,5 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 	profile_pic = fields.String(data_key='profilePic')
 	# threads = fields.Nested('ThreadSchema', many=True)
 	# files = fields.Nested('FileSchema', many=True)
-	items = fields.Nested('ItemSchema', many=True)
+	# items = fields.Nested('ItemSchema', many=True)
 	password = fields.String(required=True)

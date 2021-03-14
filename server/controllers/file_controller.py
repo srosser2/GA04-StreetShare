@@ -3,7 +3,7 @@ from flask import Blueprint, request, g
 import json
 from models.file import File
 from serializers.file import FileSchema
-from serializers.user import UserSchema
+# from serializers.user import UserSchema
 from decorators.secure_route import secure_route
 from marshmallow.exceptions import ValidationError
 
@@ -13,7 +13,7 @@ from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
 
 file_schema = FileSchema()
-user_schema = UserSchema()
+# user_schema = UserSchema()
 
 router = Blueprint(__name__, 'files')
 
@@ -33,6 +33,7 @@ def get_all_files():
 @secure_route
 def create_file():
     file_dictionary = request.json
+    print('abc')
     try:
         cloud_response = upload(file_dictionary['content'])
         file = File(

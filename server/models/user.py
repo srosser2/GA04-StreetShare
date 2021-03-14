@@ -1,15 +1,14 @@
 from app import db, bcrypt
-from models.base import BaseModel
-from models.thread import Thread
-from models.file import File
-from config.environment import secret
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import *
+from config.environment import secret
 import jwt
 
 from models.base import BaseModel
 from models.users_threads import users_threads_join
-from models.item import Item
+# from models.item import Item
+# from models.thread import Thread # May need to comment out later
+# from models.file import File
 
 
 class User(db.Model, BaseModel):
@@ -23,11 +22,10 @@ class User(db.Model, BaseModel):
     profile_pic = db.Column(db.String(200), nullable=True)
     rating = db.Column(db.String(200), nullable=True)
     password_hash = db.Column(db.String(128), nullable=True)
-    # threads = db.relationship('Thread', backref='users', secondary=users_threads_join)
-    messages = db.relationship(
-        'Message', backref='users', cascade="all, delete")
-    items = db.relationship('Item', backref='users', cascade="all, delete")
-    files = db.relationship('File', backref='users', cascade="all, delete")
+    # threads = db.relationship('Thread', secondary=users_threads_join, backref='users')
+    # messages = db.relationship('Message', backref='users', cascade="all, delete")
+    # items = db.relationship('Item', backref='users', cascade="all, delete")
+    # files = db.relationship('File', backref='users', cascade="all, delete")
 
     # ! The equivalent of a virtual field in sqlalchemy
     # ! This is a temporary field that should be not be saved in db

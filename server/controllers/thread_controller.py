@@ -1,6 +1,11 @@
 from flask import Blueprint, request, g
+
+router = Blueprint(__name__, 'threads')
+
+
 from decorators.secure_route import secure_route
 from models.thread import Thread
+# from models.user import User
 from models.message import Message
 
 from serializers.thread import ThreadSchema
@@ -9,7 +14,6 @@ from serializers.message import MessageSchema
 thread_schema = ThreadSchema()
 message_schema = MessageSchema()
 
-router = Blueprint(__name__, 'threads')
 
 
 @router.route("/threads", methods=["GET"])

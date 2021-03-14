@@ -1,7 +1,7 @@
 from app import db
 from models.base import BaseModel
 from models.booking import Booking
-from models.category import Category
+# from models.category import Category
 
 
 class Item(db.Model, BaseModel):

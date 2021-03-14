@@ -1,16 +1,20 @@
 from flask import Blueprint, request, g
+
+router = Blueprint(__name__, 'items')
+
 import json
 from models.item import Item
-from models.category import Category
+# from models.category import Category
 from serializers.item import ItemSchema
 from serializers.category import CategorySchema
-from decorators.secure_route import secure_route
+
 from marshmallow.exceptions import ValidationError
 
 item_schema = ItemSchema()
 category_schema = CategorySchema()
 
-router = Blueprint(__name__, 'items')
+from decorators.secure_route import secure_route
+
 
 
 @router.route("/items", methods=["GET"])
