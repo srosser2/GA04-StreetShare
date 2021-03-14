@@ -49,19 +49,20 @@ const Login = ({ history }) => {
       label: 'Sign In',
       handler: async () => {
         const formData = {}
-        for (const field in loginForm){
+        for (const field in loginForm) {
           formData[field] = loginForm[field].value
           loginForm[field].dirty = true
         }
         const { data } = await axios.post('/api/login', formData)
           .then(({ data }) => {
             if (!localStorage) return
-            if (!data.token) return 
+            if (!data.token) return
             localStorage.setItem('token', data.token)
             console.log(localStorage)
+            location.reload()
             history.push('/profile/1')
           })
-          .catch(err =>  console.log(err.response))        
+          .catch(err => console.log(err.response))
       },
       classes: []
     }
@@ -74,7 +75,7 @@ const Login = ({ history }) => {
       controls={formControls}
       onChange={e => handleChange(e)}
       onSelectChange={handleSelectChange}
-      />
+    />
   </div>
 }
 

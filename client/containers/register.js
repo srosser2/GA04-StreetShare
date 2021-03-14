@@ -94,7 +94,7 @@ const Register = ({ history }) => {
       label: 'Sign Up',
       handler: async () => {
         const formData = {}
-        for (const field in loginForm){
+        for (const field in loginForm) {
           formData[field] = loginForm[field].value
           loginForm[field].dirty = true
         }
@@ -102,7 +102,7 @@ const Register = ({ history }) => {
           .then(({ data }) => {
             history.push(`/profile/${data.id}`)
           })
-          .catch(err =>  console.log(err.response))        
+          .catch(err => console.log(err.response))
       },
       classes: []
     }
@@ -114,7 +114,7 @@ const Register = ({ history }) => {
       controls={formControls}
       onChange={e => handleChange(e)}
       onSelectChange={handleSelectChange}
-      />
+    />
   </div>
 }
 

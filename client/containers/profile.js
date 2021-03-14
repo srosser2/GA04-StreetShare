@@ -40,17 +40,17 @@ const Profile = ({ match }) => {
   })
 
   return <div>
-        <figure className="image is-3by2 mb-2">
-          <img src={results.profilePic} alt={results.lastName} />
-        </figure>
-        <div className={'container'}>
-          <h1>{results.firstName} {results.lastName}</h1>
-          <h2>{results.address}</h2>
+    <figure className="image is-3by2 mb-2">
+      <img src={results.profilePic} alt={results.lastName} />
+    </figure>
+    <div className={'container'}>
+      <h1>{results.firstName} {results.lastName}</h1>
+      <h2>{results.address}</h2>
 
-          <div className={'card-container'}>
-            {userItems}
-          </div>
-        </div>
+      <div className={'card-container'}>
+        {userItems}
+      </div>
+    </div>
 
   </div>
 }

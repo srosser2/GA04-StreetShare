@@ -15,6 +15,7 @@ import Login from './containers/login'
 import Register from './containers/register'
 import Inbox from './containers/inbox'
 import NavBar from './components/navbar'
+import Footer from './components/footer'
 
 // ! Some starter code for your frontend, change this
 // ! however you like.
@@ -31,7 +32,7 @@ const App = () => (
       <Route exact path='/browse' component={Browse} />
 
     </Switch>
-
+    <Footer />
   </BrowserRouter>
 )
 
