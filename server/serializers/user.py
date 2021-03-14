@@ -17,3 +17,13 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 	# files = fields.Nested('FileSchema', many=True)
 	# items = fields.Nested('ItemSchema', many=True)
 	password = fields.String(required=True)
+
+
+class UserSchemaBasic(ma.SQLAlchemyAutoSchema):
+
+	class Meta:
+		model = User
+		# load_instance = True
+	first_name = fields.String(data_key='firstName')
+	last_name = fields.String(data_key='lastName')
+	ma.auto_field('address', hide=True) 

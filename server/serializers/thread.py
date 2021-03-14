@@ -8,5 +8,5 @@ class ThreadSchema(ma.SQLAlchemyAutoSchema):
 		model = Thread
 		load_instance = True
 
-	users = fields.Nested('UserSchema', many=True)
+	users = fields.Nested('UserSchemaBasic', many=True, exclude=('address', 'email', 'password_hash', 'created_at', 'rating'))
 	messages = fields.Nested('MessageSchema', many=True)
