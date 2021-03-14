@@ -14,6 +14,8 @@ class Item(db.Model, BaseModel):
     description = db.Column(db.String(500), nullable=True)
     note = db.Column(db.String(200), nullable=True)
     image = db.Column(db.Text, nullable=False)
+    lat = db.Column(db.Float, nullable=True)
+    lng = db.Column(db.Float, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
     bookings = db.relationship(
