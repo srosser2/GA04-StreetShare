@@ -8,7 +8,12 @@ const Item = ({ match }) => {
 
   const currentUser = getLoggedInUser()
 
-  const { loading, results, error } = useAxios(`/api/items/${match.params.id}`, 'get')
+  const axiosConfig = {
+    url: `/api/items/${match.params.id}`,
+    method: 'get'
+  }
+
+  const { loading, results, error } = useAxios(axiosConfig)
 
   // Display something while loading
   if (loading) {
