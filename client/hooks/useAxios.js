@@ -34,6 +34,7 @@ const useAxios = ({url, method, body, headers}) => {
   return {
     loading,
     results,
+    setResults,
     error
   }
 }

@@ -34,7 +34,7 @@ $light-grey: #f3f3f4;
   flex-grow: 1;
 }
 
-.inbox-messages-container {
+.inbox-conversation-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,6 +46,9 @@ $light-grey: #f3f3f4;
 .inbox-message-list-container {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-end;
+
 }
 
 .inbox-message-input-container {

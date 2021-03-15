@@ -1,6 +1,11 @@
 $light-grey: #f3f3f4;
 
 
+.page-title {
+  font-size: 32px;
+  margin: 10px 0;
+}
+
 // Navbar
 
 .navbar-container ul {
@@ -44,6 +49,7 @@ $light-grey: #f3f3f4;
 .thread-card {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .thread-card-avatar {
@@ -65,23 +71,30 @@ $light-grey: #f3f3f4;
   font-size: 14px;
 }
 
+.selected-thread {
+  color: coral;
+}
+
+
 // Messages
 
 .message-card {
   display: flex;
+  flex-direction: column;
   margin: 10px;
 }
 
-.message-card-avatar {
-  height: 40px;
-  width: 40px;
-  margin: 10px;
+
+.message-card-info {
+  font-size: 12px;
 }
 
 .message-card-content {
-  flex-grow: 1;
-  // background-color: $light-grey;
-  padding: 10px 20px;
+  background-color: $light-grey;
+  padding: 5px 10px;
+  border-radius: 5px;
+  align-self: flex-start;
+  
 }
 
 

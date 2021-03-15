@@ -7,12 +7,9 @@ import './styles/elements.scss'
 import './styles/modifiers.scss'
 import axios from 'axios'
 
-import useLocalStorage from './hooks/useLocalStorage'
-
 
 //importing Components
 import Browse from './containers/browse'
-
 import Profile from './containers/profile'
 import Login from './containers/login'
 import Register from './containers/register'
@@ -21,11 +18,20 @@ import NavBar from './components/navbar'
 import Footer from './components/footer'
 import Item from './containers/item'
 
+import { ThreadProvider } from './contexts/ThreadProvider'
+import { SocketProvider } from './contexts/SocketProvider'
+
+import { getLoggedInUser } from './lib/auth'
+const token = localStorage.getItem('token')
+
 
 // ! Some starter code for your frontend, change this
 // ! however you like.
+const loggedInUser = getLoggedInUser()
+
 const App = () => (
   <BrowserRouter>
+
     <NavBar />
     <Switch>
       <Route exact path="/" component={Home} />
@@ -33,12 +39,18 @@ const App = () => (
       <Route exact path="/register" component={Register} />
       <Route exact path="/profile/:id" component={Profile} />
       <Route exact path="/items/:id" component={Item} />
-      <Route exact path="/inbox" component={Inbox} />
       <Route exact path="/test/backend" component={TestBackend} />
       <Route exact path='/browse' component={Browse} />
+      <SocketProvider id={loggedInUser.sub} token={token}>
+        <ThreadProvider>                
+          <Route exact path="/inbox" component={Inbox} />
+        </ThreadProvider>
+      </SocketProvider>
+      
 
     </Switch>
     <Footer />
+    
   </BrowserRouter>
 )
 
