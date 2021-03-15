@@ -3,36 +3,41 @@ import jwt
 from config.environment import secret
 from functools import wraps
 
-from models.user import User
+# from models.user import User
 
 
-def secure_route(func):
+def secure_user(user_model):
 
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        token_with_bearer = request.headers.get('Authorization')
+    def secure_route(func):
 
-        if not token_with_bearer:
-            return {'message': 'Unauthorized'}, 401
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            token_with_bearer = request.headers.get('Authorization')
 
-        token = token_with_bearer.replace('Bearer ', '')
+            if not token_with_bearer:
+                return {'message': 'Unauthorized'}, 401
 
-        try:
-            payload = jwt.decode(token, secret, 'HS256')
-            user_id = payload['sub']
-            user = User.query.get(user_id)
+            token = token_with_bearer.replace('Bearer ', '')
 
-            if not user:
-                return { 'message': 'Unauthorized' }, 401
+            try:
+                payload = jwt.decode(token, secret, 'HS256')
+                user_id = payload['sub']
+                user = user_model.query.get(user_id)
 
-            g.current_user = user
+                if not user:
+                    return { 'message': 'Unauthorized' }, 401
 
-        except jwt.ExpiredSignatureError:
-            return { 'message': 'Token is expired' }, 401
+                g.current_user = user
 
-        except Exception as e:
-            return { 'message': str(e) }, 401
+            except jwt.ExpiredSignatureError:
+                return { 'message': 'Token is expired' }, 401
 
-        return func(*args, **kwargs)
+            except Exception as e:
+                return { 'message': str(e) }, 401
+
+            return func(*args, **kwargs)
+        
+        return wrapper
     
-    return wrapper
+    return secure_route
+    

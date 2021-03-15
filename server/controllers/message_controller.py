@@ -1,5 +1,5 @@
 from flask import Blueprint, request, g
-from decorators.secure_route import secure_route
+# from decorators.secure_route import secure_route
 
 from models.message import Message
 from models.thread import Thread
@@ -14,7 +14,7 @@ router = Blueprint(__name__, 'messages')
 
 
 @router.route('/threads/<int:thread_id>/messages', methods=['GET'])
-@secure_route
+# @secure_route
 def get_all_messages(thread_id):
     thread = Thread.query.get(thread_id)
     messages = thread.messages
@@ -25,7 +25,7 @@ def get_all_messages(thread_id):
     # return thread_schema.jsonify(threads, many=True), 200
 
 @router.route('/threads/<int:thread_id>/messages', methods=['POST'])
-@secure_route
+# @secure_route
 def post_messages(thread_id):
     thread = Thread.query.get(thread_id)
     if not g.current_user in thread.users:

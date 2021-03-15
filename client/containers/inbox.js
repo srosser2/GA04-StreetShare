@@ -15,15 +15,16 @@ const Inbox = ({ history, match }) => {
   const token = localStorage.getItem('token')
   
 
-  const config = {
-    url: `/api/users/${loggedInUser.sub}/threads`,
-    method: 'get',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
-
-  const { loading, results, error } = useAxios(config)
+  // const config = {
+  //   url: `/api/users/${loggedInUser.sub}/threads`,
+  //   method: 'get',
+  //   headers: {
+  //     Authorization: `Bearer ${token}`
+  //   }
+  // }
+  // const { loading, results, error } = useAxios(config)
+  
+  const results = []
   const [currentThread, updateCurrentThread] = useState()
 
   const [messages, updateMessages] = useState([])

@@ -7,6 +7,9 @@ import './styles/elements.scss'
 import './styles/modifiers.scss'
 import axios from 'axios'
 
+import useLocalStorage from './hooks/useLocalStorage'
+
+
 //importing Components
 import Browse from './containers/browse'
 
