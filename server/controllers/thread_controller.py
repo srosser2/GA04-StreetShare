@@ -3,9 +3,9 @@ from flask import Blueprint, request, g
 router = Blueprint(__name__, 'threads')
 
 
-# from decorators.secure_route import secure_route
+from decorators.secure_route import secure_route
 from models.thread import Thread
-# from models.user import User
+from models.user import User
 from models.message import Message
 
 from serializers.thread import ThreadSchema
@@ -33,7 +33,7 @@ def get_single_threads(thread_id):
 
 
 @router.route('/users/<int:user_id>/threads/', methods=['GET'])
-# @secure_route
+@secure_route
 def get_users_threads(user_id):
     if (g.current_user.id != user_id):
         return { 'message': 'Unauthorized'}

@@ -3,8 +3,8 @@ from flask import Blueprint, request, g
 import json
 from models.file import File
 from serializers.file import FileSchema
-# from serializers.user import UserSchema
-# from decorators.secure_route import secure_route
+from serializers.user import UserSchema
+from decorators.secure_route import secure_route
 from marshmallow.exceptions import ValidationError
 
 import cloudinary
@@ -13,7 +13,7 @@ from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
 
 file_schema = FileSchema()
-# user_schema = UserSchema()
+user_schema = UserSchema()
 
 router = Blueprint(__name__, 'files')
 
@@ -30,7 +30,7 @@ def get_all_files():
 
 
 @router.route('/files', methods=['POST'])
-# @secure_route
+@secure_route
 def create_file():
     file_dictionary = request.json
     print('abc')
@@ -48,7 +48,7 @@ def create_file():
     return file_schema.jsonify(file), 200
 
 @router.route('/files/<int:file_id>', methods=['DELETE'])
-# @secure_route
+@secure_route
 def delete_file(file_id):
     file_to_delete = File.query.get(file_id)
     if not file_to_delete.user_id == g.current_user.id:

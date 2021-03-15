@@ -1,6 +1,6 @@
 from flask import Blueprint, request, g
 from models.booking import Booking
-# from decorators.secure_route import secure_route
+from decorators.secure_route import secure_route
 from marshmallow.exceptions import ValidationError
 
 from serializers.booking import BookingSchema
@@ -25,7 +25,7 @@ def get_single_booking(booking_id):
 
 
 @router.route("/bookings", methods={"POST"})
-# @secure_route
+@secure_route
 def create_booking():
     booking_dictionary = request.json
     try:
@@ -54,7 +54,7 @@ def update_booking(booking_id):
 
 
 @router.route("/booking/<int:booking_id>", methods=["DELETE"])
-# @secure_route
+@secure_route
 def remove_booking(booking_id):
     booking = Booking.query.get(booking_id)
     if booking.user_id != g.current_user.id:

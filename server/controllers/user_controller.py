@@ -7,6 +7,7 @@ from marshmallow.exceptions import ValidationError
 from models.user import User
 # from models.thread import Thread
 from serializers.user import UserSchema
+from serializers.item import ItemSchema
 # from serializers.thread import ThreadSchema
 # sending confirmation email
 # import os
@@ -17,6 +18,7 @@ from decorators.secure_route import secure_route
 
 # ends here
 user_schema = UserSchema()
+item_schema = ItemSchema()
 # thread_schema = ThreadSchema()
 
 
@@ -26,7 +28,7 @@ user_schema = UserSchema()
 def register():
     user_dict = request.json
 
-    try: 
+    try:
         user = user_schema.load(user_dict)
 
     except ValidationError as e:
@@ -56,7 +58,7 @@ def register():
     return user_schema.jsonify(user), 201
 
 
-@ router.route('/login', methods=['POST'])
+@router.route('/login', methods=['POST'])
 def login():
     user_dict = request.json
     user = User.query.filter_by(email=user_dict['email']).first()

@@ -14,9 +14,7 @@ from marshmallow.exceptions import ValidationError
 item_schema = ItemSchema()
 category_schema = CategorySchema()
 
-from decorators.secure_route import secure_user
-
-secure_route = secure_user(User)
+from decorators.secure_route import secure_route
 
 
 @router.route("/items", methods=["GET"])
@@ -63,7 +61,7 @@ def update_item(item_id):
 
 
 @router.route("/items/<int:item_id>", methods=["DELETE"])
-# @secure_route
+@secure_route
 def remove_item(item_id):
     item = Item.query.get(item_id)
     if item.user_id != g.current_user.id:
