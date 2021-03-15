@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import Map from '../components/map'
+import Map from '../components/googleMap'
 import 'bulma'
 
-const Browse = () => {
+const Browse = ({ history }) => {
 
   const [items, updateItems] = useState([])
   const [users, updateUser] = useState([])
@@ -29,7 +29,8 @@ const Browse = () => {
       description: description,
       image: image,
       user_id: user_id,
-      bookings: bookings
+      bookings: bookings,
+
     }
     updateselectedLocation(itemDetails)
     if (!sideCard) {
@@ -42,8 +43,8 @@ const Browse = () => {
     const reqTwo = axios.get('/api/users')
     axios.all([reqOne, reqTwo])
       .then(axios.spread((...responses) => {
-        console.log(responses[0])
-        console.log(responses[1])
+        // console.log(responses[0])
+        // console.log(responses[1])
         updateItems(responses[0].data)
         updateUser(responses[1].data)
       }))
@@ -62,7 +63,7 @@ const Browse = () => {
               <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
                 <div className="columns is-multiline">
                   {items.map((item) => {
-                    return <div key={item.id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
+                    return <div key={item.id} className={!sideCard ? 'column is-one-third' : 'column is-half'} onClick={() => history.push(`/items/${item.id}`)}>
                       <div className="card cardHeight" id={selectedItem.id === item.id ? 'selected' : 'cardHover'} onClick={() => handleSelectedItem(item)}>
                         <div className="card-content">
                           <div className="media">
@@ -112,8 +113,13 @@ const Browse = () => {
         </section>
         :
         <Map
-        // long={long}
-        // lat={lat}
+          latAndLng={
+            items.map((corrdinat) => {
+              return { lat: corrdinat.lat, lng: corrdinat.lng }
+            })
+          }
+        //  long={long}
+        //  lat={lat}
         // zoom={zoom}
         // coordinate={items.map((coordinate) => {
         //   return { coordinate: coordinate.location, id: coordinate._id }
