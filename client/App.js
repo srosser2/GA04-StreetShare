@@ -16,6 +16,8 @@ import Register from './containers/register'
 import Inbox from './containers/inbox'
 import NavBar from './components/navbar'
 import Footer from './components/footer'
+import Item from './containers/item'
+
 
 // ! Some starter code for your frontend, change this
 // ! however you like.
@@ -27,6 +29,7 @@ const App = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/profile/:id" component={Profile} />
+      <Route exact path="/items/:id" component={Item} />
       <Route exact path="/inbox" component={Inbox} />
       <Route exact path="/test/backend" component={TestBackend} />
       <Route exact path='/browse' component={Browse} />
