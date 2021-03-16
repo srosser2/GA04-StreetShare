@@ -11,8 +11,9 @@ import axios from 'axios'
 //importing Components
 import Browse from './containers/browse'
 import Profile from './containers/profile'
-import Login from './containers/login'
-import Register from './containers/register'
+import RegisterAndLogin from './containers/registerAndLogIn'
+// import Login from './containers/login'
+// import Register from './containers/register'
 import Inbox from './containers/inbox'
 import Item from './containers/item'
 import Booking from './containers/booking'
@@ -33,24 +34,21 @@ const loggedInUser = getLoggedInUser()
 
 const App = () => (
   <BrowserRouter>
-<<<<<<< HEAD
-=======
-
->>>>>>> development
     <SocketProvider id={loggedInUser.sub} token={token}>
       <ThreadProvider>
         <FileUploadProvider token={token}>
           <NavBar />
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            {/* <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} /> */}
+            <Route exact path="/register" component={RegisterAndLogin} />
             <Route exact path="/items/:id" component={Item} />
             <Route exact path='/browse' component={Browse} />
             <Route exact path="/inbox" component={Inbox} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/booking" component={Booking} />
           </Switch>
-          {/* <Footer /> */}
+          <Footer />
         </FileUploadProvider>
       </ThreadProvider>
     </SocketProvider>

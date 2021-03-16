@@ -8,6 +8,7 @@ const Login = ({ history }) => {
     email: {
       label: 'Email',
       element: 'input',
+      classes: ['input'],
       type: 'text',
       placeholder: 'Enter your email',
       value: '',
@@ -20,6 +21,7 @@ const Login = ({ history }) => {
     password: {
       label: 'Password',
       element: 'input',
+      classes: ['input'],
       type: 'password',
       placeholder: 'Enter your password',
       value: '',
@@ -60,16 +62,15 @@ const Login = ({ history }) => {
             localStorage.setItem('token', data.token)
             console.log(localStorage)
             location.reload()
-            history.push('/profile/1')
+            history.push('/browse')
           })
           .catch(err => console.log(err.response))
       },
-      classes: []
+      classes: ['button is-success']
     }
   }
 
-  return <div>
-    <h1>test</h1>
+  return <div >
     <Form
       config={loginForm}
       controls={formControls}
