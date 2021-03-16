@@ -32,22 +32,9 @@ const loggedInUser = getLoggedInUser()
 
 const App = () => (
   <BrowserRouter>
-<<<<<<< HEAD
-    <NavBar />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/profile/:id" component={Profile} />
-      <Route exact path="/inbox" component={Inbox} />
-      <Route exact path="/test/backend" component={TestBackend} />
-      <Route exact path='/browse' component={Browse} />
-    </Switch>
-    <Footer />
-=======
     <SocketProvider id={loggedInUser.sub} token={token}>
       <ThreadProvider>
-        <FileUploadProvider token={token}>   
+        <FileUploadProvider token={token}>
           <NavBar />
           <Switch>
             <Route exact path="/login" component={Login} />
@@ -61,7 +48,6 @@ const App = () => (
         </FileUploadProvider>
       </ThreadProvider>
     </SocketProvider>
->>>>>>> fd6f17639b031d8b1dd41e32485c21e4ec1b0de5
   </BrowserRouter>
 )
 
