@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import 'bulma'
 import axios from 'axios'
 
@@ -9,7 +10,11 @@ import { getLoggedInUser } from '../lib/auth'
 import useAxios from '../hooks/useAxios'
 import { useFileUploads } from '../contexts/FileUploadProvider'
 
-const Profile = ({ match }) => {
+const Profile = ({ match, location }) => {
+
+  const ITEMS = 'items'
+  const BOOKINGS = 'bookings'
+  const BORROWING = 'borrowing'
 
   const currentUser = getLoggedInUser()
   const token = localStorage.getItem('token')
@@ -74,6 +79,7 @@ const Profile = ({ match }) => {
       }
     }
   })
+  const [currentTab, updateCurrentTab] = useState('items')
 
   useEffect(() => {
     if (categoryResults && categoryResults.length < 1) return
@@ -94,6 +100,12 @@ const Profile = ({ match }) => {
     }
   }, [selectedFile])
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const tab = params.get('tab')
+    updateCurrentTab(tab)
+  }, [match.params])
+
   // Display something while loading
   if (loading) {
     return <h1>Loading</h1>
@@ -103,6 +115,30 @@ const Profile = ({ match }) => {
   if (!results.id) {
     return <h1>User not found</h1>
   }
+
+  const sideMenuItems = [
+    {
+      label: 'My Items',
+      link: `/profile/${match.params.id}?tab=${ITEMS}`
+    },
+    {
+      label: 'My Booking Agreements',
+      link: `/profile/${match.params.id}?tab=${BOOKINGS}`
+    },
+    {
+      label: 'My Borrowing Agreements',
+      link: `/profile/${match.params.id}?tab=${BORROWING}`
+    }
+  ]
+
+  const sideMenu = sideMenuItems.map((menuItem, i) => {
+    return (
+      <div key={i}>
+        <NavLink to={menuItem.link}>{menuItem.label}</NavLink> 
+      </div>
+    )
+  })
+
 
   const userItems = results.items.map(item => {
     return <div key={item.id} className={'card'}>
@@ -131,6 +167,40 @@ const Profile = ({ match }) => {
       <td>Status</td>
     </tr>
   })
+
+  const itemTab = <>
+    <div>
+      <h2>My Items</h2>
+      <button onClick={() => updateShowSideDraw(true)}>Upload new item</button>
+    </div>
+    <div>
+      <table className={'item-table'}>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {itemTable}
+        </tbody>
+      </table>
+    </div>
+  </>
+
+  const bookingsTab = <>
+    <div>
+      <h2>My Bookings</h2>
+    </div>
+  </>
+
+  const borrowingTab = <>
+    <div>
+      <h2>Borrowed Items</h2>
+    </div>
+  </>
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -186,6 +256,23 @@ const Profile = ({ match }) => {
     onFileChange={handleFileChange}
   />
 
+  let tabBody
+
+  switch (currentTab) {
+    case ITEMS: {
+      tabBody = itemTab
+      break
+    }
+    case BOOKINGS: {
+      tabBody = bookingsTab
+      break
+    }
+    case BORROWING: {
+      tabBody = borrowingTab
+      break
+    }
+  }
+
   const sideDraw = showSideDraw ? 
     <SideDraw closeSideDrawHandler={() => updateShowSideDraw(false)}>
       {itemFormElement}
@@ -200,7 +287,7 @@ const Profile = ({ match }) => {
         </figure>
       </div>
       <div className={'side-menu-nav-container'}>
-
+        {sideMenu}
       </div>
     </div>
     <div className={'profile-main-container'}>
@@ -210,25 +297,8 @@ const Profile = ({ match }) => {
         <h2>{results.address}</h2>
       </div>
       <div className={'profile-body-container'}>
-        <div>
-          <h2>My Items</h2>
-          <button onClick={() => updateShowSideDraw(true)}>Upload new item</button>
-        </div>
-        <div>
-          <table className={'item-table'}>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {itemTable}
-            </tbody>
-          </table>
-        </div>
+       
+        {tabBody}
         {/* <div className={'card-container'}>
           {userItems}
         </div> */}
