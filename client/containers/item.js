@@ -4,7 +4,7 @@ import 'bulma'
 import { getLoggedInUser } from '../lib/auth'
 import useAxios from '../hooks/useAxios'
 
-const Item = ({ match }) => {
+const Item = ({ match, history }) => {
 
   const currentUser = getLoggedInUser()
 
@@ -33,7 +33,7 @@ const Item = ({ match }) => {
     </div>
     <div>
       <button onClick={() => console.log('Contact the owner - redirect to inbox')}>Contact owner</button>
-      <button onClick={() => console.log('Arrange booking - redirect to booking form.')}>Arrange booking</button>
+      <button onClick={() => history.push(`/booking?item=${results.id}`)}>Arrange booking</button>
     </div>
     <p>{results.note}</p>
 

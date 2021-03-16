@@ -15,14 +15,14 @@ export default function Threads() {
       console.log(selectedThreadIndex)
       }
     }>
-        <div className={'thread-card-avatar'}>
-          <img src={blankAvatar} className={'avatar'}/>
-        </div>
-        <div className={'thread-card-content'}>
-          <h4>{thread.users[1].firstName} {thread.users[1].lastName}</h4>
-          <p>{thread.messages[thread.messages.length - 1].content}</p>
-        </div>
+      <div className={'thread-card-avatar'}>
+        <img src={blankAvatar} className={'avatar'}/>
       </div>
+      <div className={'thread-card-content'}>
+        <h4>{thread.users[1].firstName} {thread.users[1].lastName}</h4>
+        <p>{thread.messages[thread.messages.length - 1].content}</p>
+      </div>
+    </div>
   })
 
   return (
