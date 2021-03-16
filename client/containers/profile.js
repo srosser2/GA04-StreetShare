@@ -15,19 +15,16 @@ const Profile = ({ match }) => {
   const token = localStorage.getItem('token')
 
   const { loading, results, error } = useAxios({ url: `/api/users/${match.params.id}`, method: 'get'})
-
-  const { selectedFile, updateSelectedFile, getBase64, fileBase64, uploadImageHandler } = useFileUploads()
-
+  const { selectedFile, updateSelectedFile, getBase64, fileBase64, uploadImageHandler, fileIsUploading } = useFileUploads()
   const { loading: categoriesLoading, results: categoryResults, error: categoryError } = useAxios({ url: '/api/categories', method: 'get'})
-
   const [showSideDraw, updateShowSideDraw] = useState(false)
-
   const [itemForm, updateItemForm] = useState({
     title: {
       label: 'Item',
       element: 'input',
       type: 'text',
       placeholder: 'Enter an item name',
+      classes: ['input'],
       value: '',
       validation: {
         required: true
@@ -51,6 +48,7 @@ const Profile = ({ match }) => {
       type: 'text',
       placeholder: 'Enter a description',
       value: '',
+      classes: ['textarea'],
       validation: {
         required: true
       },
@@ -188,7 +186,11 @@ const Profile = ({ match }) => {
     onFileChange={handleFileChange}
   />
 
-  const sideDraw = showSideDraw ? <SideDraw closeSideDrawHandler={() => updateShowSideDraw(false)}>{itemFormElement}</SideDraw> : null
+  const sideDraw = showSideDraw ? 
+    <SideDraw closeSideDrawHandler={() => updateShowSideDraw(false)}>
+      {itemFormElement}
+      {fileIsUploading ? <p>Item uploading</p> : <p></p>}
+    </SideDraw> : null
 
   return <div className={'profile-container'}>
     <div className={'side-menu'}>

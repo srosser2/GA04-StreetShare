@@ -14,9 +14,10 @@ import Profile from './containers/profile'
 import Login from './containers/login'
 import Register from './containers/register'
 import Inbox from './containers/inbox'
+import Item from './containers/item'
+import Booking from './containers/booking'
 import NavBar from './components/navbar'
 import Footer from './components/footer'
-import Item from './containers/item'
 
 import { ThreadProvider } from './contexts/ThreadProvider'
 import { SocketProvider } from './contexts/SocketProvider'
@@ -32,19 +33,7 @@ const loggedInUser = getLoggedInUser()
 
 const App = () => (
   <BrowserRouter>
-<<<<<<< HEAD
-    <NavBar />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/profile/:id" component={Profile} />
-      <Route exact path="/inbox" component={Inbox} />
-      <Route exact path="/test/backend" component={TestBackend} />
-      <Route exact path='/browse' component={Browse} />
-    </Switch>
-    <Footer />
-=======
+
     <SocketProvider id={loggedInUser.sub} token={token}>
       <ThreadProvider>
         <FileUploadProvider token={token}>   
@@ -56,12 +45,12 @@ const App = () => (
             <Route exact path='/browse' component={Browse} />
             <Route exact path="/inbox" component={Inbox} />
             <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path="/booking" component={Booking} />
           </Switch>
           {/* <Footer /> */}
         </FileUploadProvider>
       </ThreadProvider>
     </SocketProvider>
->>>>>>> fd6f17639b031d8b1dd41e32485c21e4ec1b0de5
   </BrowserRouter>
 )
 

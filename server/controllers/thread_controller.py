@@ -31,6 +31,10 @@ def get_single_threads(thread_id):
         return {'message': 'Thread not found'}, 404
     return thread_schema.jsonify(thread), 200
 
+# @router.route('/threads/', methods=['POST'])
+# def create_new_thread():
+#     thread_dict = request.json
+
 
 @router.route('/users/<int:user_id>/threads/', methods=['GET'])
 @secure_route
