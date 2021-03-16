@@ -3,7 +3,7 @@ $light-grey: #f3f3f4;
 
 .page-title {
   font-size: 32px;
-  margin: 10px 0;
+  margin: 10px;
 }
 
 // Navbar
@@ -120,4 +120,51 @@ $light-grey: #f3f3f4;
 .message-card-avatar .avatar {
   height: 40px;
   width: 40px;
+}
+
+
+// Profile
+
+.side-menu-avatar {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+}
+
+.side-menu-avatar img {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+// Table
+
+.item-table > thead > tr {
+  border-bottom: 1px solid $light-grey;
+}
+
+.item-table > thead > tr > th,
+.item-table > tbody > tr > td {
+  padding: 20px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.table-row-item {
+  display: flex;
+  align-items: center;
+}
+
+.table-image-container {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+}
+
+.table-image-container img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 100%;
 }

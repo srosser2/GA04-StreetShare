@@ -20,6 +20,7 @@ import Item from './containers/item'
 
 import { ThreadProvider } from './contexts/ThreadProvider'
 import { SocketProvider } from './contexts/SocketProvider'
+import { FileUploadProvider } from './contexts/FileUploadProvider'
 
 import { getLoggedInUser } from './lib/auth'
 const token = localStorage.getItem('token')
@@ -37,7 +38,9 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
-      <Route exact path="/profile/:id" component={Profile} />
+      <FileUploadProvider token={token}>
+        <Route exact path="/profile/:id" component={Profile} />
+      </FileUploadProvider>
       <Route exact path="/items/:id" component={Item} />
       <Route exact path="/test/backend" component={TestBackend} />
       <Route exact path='/browse' component={Browse} />
@@ -49,7 +52,7 @@ const App = () => (
       
 
     </Switch>
-    <Footer />
+    {/* <Footer /> */}
     
   </BrowserRouter>
 )

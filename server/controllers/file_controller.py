@@ -33,9 +33,9 @@ def get_all_files():
 @secure_route
 def create_file():
     file_dictionary = request.json
-    print('abc')
     try:
         cloud_response = upload(file_dictionary['content'])
+        print(cloud_response)
         file = File(
             url = cloud_response['secure_url'],
             cloud_id = cloud_response['asset_id'],

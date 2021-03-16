@@ -8,7 +8,7 @@ from models.base import BaseModel
 from models.users_threads import users_threads_join
 from models.item import Item
 # from models.thread import Thread # May need to comment out later
-# from models.file import File
+from models.file import File
 
 
 class User(db.Model, BaseModel):
@@ -25,7 +25,7 @@ class User(db.Model, BaseModel):
     # threads = db.relationship('Thread', secondary=users_threads_join, backref='users')
     # messages = db.relationship('Message', backref='users', cascade="all, delete")
     items = db.relationship('Item', backref='users', cascade="all, delete")
-    # files = db.relationship('File', backref='users', cascade="all, delete")
+    files = db.relationship('File', backref='users', cascade="all, delete")
 
     # ! The equivalent of a virtual field in sqlalchemy
     # ! This is a temporary field that should be not be saved in db

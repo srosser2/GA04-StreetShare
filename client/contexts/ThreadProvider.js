@@ -60,7 +60,6 @@ export const ThreadProvider = ({ id, children }) => {
       return thread.messages
     })
   }
-  
 
   const value = {
     threadLoading,
