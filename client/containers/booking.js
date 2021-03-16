@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Form from '../components/form'
-
+import DateTimePicker from 'react-datetime-picker'
 import useAxios from '../hooks/useAxios'
 
 export default function Booking({ match, location}) {
@@ -23,9 +23,11 @@ export default function Booking({ match, location}) {
     url: `/api/items/${itemId}`
   }
 
-  const { loading, results, error } = useAxios(axiosConfig)
+  const { loading: itemLoading, results: itemResults, error: itemError } = useAxios(axiosConfig)
 
-  console.log(results)
+  const [startDate, updateStartDate] = useState(new Date())
+  const [endDate, updateEndDate] = useState(new Date())
+
 
   const [bookingForm, updateBookingForm] = useState({
     itemId: {
@@ -121,8 +123,12 @@ export default function Booking({ match, location}) {
   })
 
   return (
-    <div>
+    <div className={'container'}>
       <h1>Booking</h1>
+      <h2>{itemResults.title}</h2>
+      <h2>Borrowing Start Date</h2>
+      <DateTimePicker onChange={updateStartDate} value={startDate}/>
+
     </div>
   )
 }

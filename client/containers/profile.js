@@ -24,6 +24,7 @@ const Profile = ({ match }) => {
       element: 'input',
       type: 'text',
       placeholder: 'Enter an item name',
+      classes: ['input'],
       value: '',
       validation: {
         required: true
@@ -47,6 +48,7 @@ const Profile = ({ match }) => {
       type: 'text',
       placeholder: 'Enter a description',
       value: '',
+      classes: ['textarea'],
       validation: {
         required: true
       },
