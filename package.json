@@ -36,8 +36,11 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^16.13.1",
+    "react-geocode": "^0.2.3",
+    "react-google-autocomplete": "^1.2.6",
     "react-google-maps": "^9.4.5",
     "react-hook-form": "^6.15.4",
+    "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.2.1",
     "validator": "^13.5.2"

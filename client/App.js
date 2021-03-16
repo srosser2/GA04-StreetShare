@@ -30,7 +30,6 @@ const App = () => (
       <Route exact path="/inbox" component={Inbox} />
       <Route exact path="/test/backend" component={TestBackend} />
       <Route exact path='/browse' component={Browse} />
-
     </Switch>
     <Footer />
   </BrowserRouter>

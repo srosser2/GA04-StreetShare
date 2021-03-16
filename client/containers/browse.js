@@ -43,8 +43,6 @@ const Browse = () => {
     const reqTwo = axios.get('/api/users')
     axios.all([reqOne, reqTwo])
       .then(axios.spread((...responses) => {
-        // console.log(responses[0])
-        // console.log(responses[1])
         updateItems(responses[0].data)
         updateUser(responses[1].data)
       }))
@@ -52,6 +50,7 @@ const Browse = () => {
 
   return (
     <main>
+
       <div className='toggle-container'>
         <button className='toggle' onClick={() => updateToggle(true)}>Grid</button>
         <button className='toggle' onClick={() => updateToggle(false)}>Map</button>
@@ -68,14 +67,14 @@ const Browse = () => {
                         <div className="card-content">
                           <div className="media">
                             <div className="media-content">
-                              <p className="title is-4 titleHeight">{item.title}</p><br></br>
+                              <p className="title is-4 titleHeight">{item.title}</p>
                               <p className="subtitle is-6">Category {item.category}</p>
                               {users.map((user) => {
                                 if (user.id === item.user_id) {
                                   return <div key={user.id}>
                                     <p className="subtitle is-6">Owner: {user.firstName + ' ' + user.lastName}</p>
                                     <p className="subtitle is-6">Address: {user.address}</p>
-                                    <p className="subtitle is-6">Rating: {user.rating}</p><br></br>
+                                    <p className="subtitle is-6">Rating: {user.rating}</p>
                                   </div>
                                 }
                               })}
