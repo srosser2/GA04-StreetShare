@@ -28,8 +28,8 @@ const NavBar = ({ history }) => {
         <li><NavLink to={'/inbox'}>Inbox</NavLink></li>
         <li><NavLink to={'/profile/1'}>Profile</NavLink></li>
         <li><NavLink to={'/browse'}>Browse</NavLink></li>
-        {!logging && <li><NavLink to={'/login'}>Log In</NavLink></li>}
-        {logging && <li> <NavLink to={'/login'} onClick={logOut}>Log Out</NavLink></li>}
+        {!logging && <li><NavLink to={'/register'}>Register/Log In</NavLink></li>}
+        {logging && <li> <NavLink to={'/register'} onClick={logOut}>Log Out</NavLink></li>}
       </ul>
     </div>
   </div>

@@ -19,9 +19,9 @@ const Profile = ({ match, location }) => {
   const currentUser = getLoggedInUser()
   const token = localStorage.getItem('token')
 
-  const { loading, results, error } = useAxios({ url: `/api/users/${match.params.id}`, method: 'get'})
+  const { loading, results, error } = useAxios({ url: `/api/users/${match.params.id}`, method: 'get' })
   const { selectedFile, updateSelectedFile, getBase64, fileBase64, uploadImageHandler, fileIsUploading } = useFileUploads()
-  const { loading: categoriesLoading, results: categoryResults, error: categoryError } = useAxios({ url: '/api/categories', method: 'get'})
+  const { loading: categoriesLoading, results: categoryResults, error: categoryError } = useAxios({ url: '/api/categories', method: 'get' })
   const [showSideDraw, updateShowSideDraw] = useState(false)
   const [itemForm, updateItemForm] = useState({
     title: {
@@ -84,12 +84,12 @@ const Profile = ({ match, location }) => {
   useEffect(() => {
     if (categoryResults && categoryResults.length < 1) return
     const categories = categoryResults.map(category => {
-        return {
-          label: category.name,
-          value: category.id
-        }
+      return {
+        label: category.name,
+        value: category.id
+      }
     })
-    const updatedItemForm = {...itemForm}
+    const updatedItemForm = { ...itemForm }
     updatedItemForm.category.options = categories
     updateItemForm(updatedItemForm)
   }, [categoryResults])
@@ -220,27 +220,28 @@ const Profile = ({ match, location }) => {
       label: 'Create Item',
       handler: async () => {
         const file = await uploadImageHandler()
-        
+
         const itemObj = {}
 
-          for (const field in itemForm){
-            itemObj[field] = itemForm[field].value
-          }
-          itemObj.image = file.url
+        for (const field in itemForm) {
+          itemObj[field] = itemForm[field].value
+        }
+        itemObj.image = file.url
 
-          const axiosConfig = {
-            url: '/api/items',
-            method: 'post',
-            data: itemObj,
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        const axiosConfig = {
+          url: '/api/items',
+          method: 'post',
+          data: itemObj,
+          headers: {
+            Authorization: `Bearer ${token}`
           }
+        }
 
-          axios.request(axiosConfig).then(({ data }) => {
-            console.log(data)
-          })
-      }
+        axios.request(axiosConfig).then(({ data }) => {
+          console.log(data)
+        })
+      },
+      classes:['button is-success']
     }
   }
 
@@ -248,14 +249,14 @@ const Profile = ({ match, location }) => {
     updateSelectedFile(e.target.files[0])
   }
 
-  const itemFormElement = <Form 
+  const itemFormElement = <Form
     config={itemForm}
     controls={formControls}
     onChange={handleChange}
     onSelectChange={handleSelectChange}
     onFileChange={handleFileChange}
   />
-
+  
   let tabBody
 
   switch (currentTab) {
@@ -303,7 +304,7 @@ const Profile = ({ match, location }) => {
           {userItems}
         </div> */}
       </div>
-        
+
     </div>
 
     {sideDraw}

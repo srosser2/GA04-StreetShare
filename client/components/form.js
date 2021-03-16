@@ -30,7 +30,7 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           name={field}
           render={() => (
             <input
-              className={config[field].classes ? config[field].classes.join(' '): null}
+              className={config[field].classes ? config[field].classes.join(' ') : null}
               onChange={e => onChange(e)}
               value={config[field].value}
               type={config[field].type}
@@ -48,7 +48,7 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           placeholder={config[field].type}
           render={() => (
             <textarea
-              className={config[field].classes ? config[field].classes.join(' '): null}
+              className={config[field].classes ? config[field].classes.join(' ') : null}
               name={field}
               onChange={e => onChange(e)}
               value={config[field].value}
@@ -64,7 +64,7 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           name={field}
           render={() => (
             <Select
-              className={config[field].classes ? config[field].classes.join(' '): null}
+              className={config[field].classes ? config[field].classes.join(' ') : null}
               defaultValue={config[field].value}
               options={config[field].options}
               onChange={(e) => onSelectChange(e, field)}
@@ -79,13 +79,30 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           control={control}
           name={field}
           render={() => (
-            <input
-              className={config[field].classes ? config[field].classes.join(' '): null}
-              type='file'
-              onChange={e => onFileChange(e)}
-              label={field}
-            />
+            <div class="file is-info has-name">
+              <label class="file-label">
+                <input class="file-input" type="file" name="resume" onChange={e => onFileChange(e)} />
+                <span class="file-cta">
+                  <span class="file-icon">
+                  </span>
+                  <span class="file-label">
+                    Choose Image to Upload</span>
+                </span>
+              </label>
+            </div>
+            // <input
+            //   style={{ color: 'red' }}
+            //   className={config[field].classes ? config[field].classes.join(' ') : null}
+            //   type='file'
+            //   onChange={e => onFileChange(e)}
+            //   label={field}
+            // />
           )}
+
+
+
+
+
         />
         break
       }
@@ -100,7 +117,7 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
       <label>{config[field].label}</label>
       {fieldBody}
       {!config[field].dirty ? null : <Form.Text className={'invalid-field'}>{validationErrorMessages.join(' ')}</Form.Text>}
-      {}
+      { }
     </div>
   })
 

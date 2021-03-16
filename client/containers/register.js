@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Form from '../components/form'
 
-const Register = ({ history }) => {
+const Register = () => {
 
   const [loginForm, updateLoginForm] = useState({
     firstName: {
       label: 'First Name',
       element: 'input',
+      classes: ['input'],
       type: 'text',
       placeholder: '',
       value: '',
@@ -19,6 +20,7 @@ const Register = ({ history }) => {
     lastName: {
       label: 'Last Name',
       element: 'input',
+      classes: ['input'],
       type: 'text',
       placeholder: '',
       value: '',
@@ -30,6 +32,7 @@ const Register = ({ history }) => {
     email: {
       label: 'Email',
       element: 'input',
+      classes: ['input'],
       type: 'text',
       placeholder: 'Enter your email',
       value: '',
@@ -42,6 +45,7 @@ const Register = ({ history }) => {
     password: {
       label: 'Password',
       element: 'input',
+      classes: ['input'],
       type: 'password',
       placeholder: 'Enter your password',
       value: '',
@@ -66,6 +70,7 @@ const Register = ({ history }) => {
     address: {
       label: 'Address',
       element: 'input',
+      classes: ['input', 'm-r-5'],
       type: 'text',
       placeholder: 'Enter your address',
       value: '',
@@ -100,11 +105,11 @@ const Register = ({ history }) => {
         }
         await axios.post('/api/register', formData)
           .then(({ data }) => {
-            history.push(`/profile/${data.id}`)
+            // history.push(`/profile/${data.id}`)
           })
           .catch(err => console.log(err.response))
       },
-      classes: []
+      classes: ['button is-success']
     }
   }
 
