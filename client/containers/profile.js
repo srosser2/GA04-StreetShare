@@ -62,6 +62,7 @@ const Profile = ({ match, location }) => {
     note: {
       label: 'Notes',
       element: 'input',
+      classes: ['input'],
       type: 'text',
       placeholder: 'Enter a note',
       value: '',
@@ -118,23 +119,26 @@ const Profile = ({ match, location }) => {
 
   const sideMenuItems = [
     {
-      label: 'My Items',
+      label: 'My Item',
+      img: <img style={{ marginRight: '15px' }} src="https://img.icons8.com/dusk/30/000000/package.png" />,
       link: `/profile/${match.params.id}?tab=${ITEMS}`
     },
     {
-      label: 'My Booking Agreements',
+      label: ' My Booking Agreements',
+      img: <img style={{ marginRight: '15px' }} src="https://img.icons8.com/dusk/30/000000/agreement.png" />,
       link: `/profile/${match.params.id}?tab=${BOOKINGS}`
     },
     {
-      label: 'My Borrowing Agreements',
+      img: <img style={{ marginRight: '15px' }} src="https://img.icons8.com/dusk/30/000000/cancel-subscription.png" />,
+      label: ' My Borrowing Agreements',
       link: `/profile/${match.params.id}?tab=${BORROWING}`
     }
   ]
 
   const sideMenu = sideMenuItems.map((menuItem, i) => {
     return (
-      <div key={i}>
-        <NavLink to={menuItem.link}>{menuItem.label}</NavLink> 
+      <div style={{ margin: '15px 15px' }} key={i}>
+        <NavLink to={menuItem.link}>{menuItem.img}{menuItem.label}</NavLink>
       </div>
     )
   })
@@ -171,7 +175,7 @@ const Profile = ({ match, location }) => {
   const itemTab = <>
     <div>
       <h2>My Items</h2>
-      <button onClick={() => updateShowSideDraw(true)}>Upload new item</button>
+      <button style={{ marginTop: '10px' }} className='button is-info' onClick={() => updateShowSideDraw(true)}>Upload new item</button>
     </div>
     <div>
       <table className={'item-table'}>
@@ -241,7 +245,7 @@ const Profile = ({ match, location }) => {
           console.log(data)
         })
       },
-      classes:['button is-success']
+      classes: ['button is-success', 'addOn']
     }
   }
 
@@ -256,7 +260,7 @@ const Profile = ({ match, location }) => {
     onSelectChange={handleSelectChange}
     onFileChange={handleFileChange}
   />
-  
+
   let tabBody
 
   switch (currentTab) {
@@ -274,7 +278,7 @@ const Profile = ({ match, location }) => {
     }
   }
 
-  const sideDraw = showSideDraw ? 
+  const sideDraw = showSideDraw ?
     <SideDraw closeSideDrawHandler={() => updateShowSideDraw(false)}>
       {itemFormElement}
       {fileIsUploading ? <p>Item uploading</p> : <p></p>}
@@ -298,7 +302,7 @@ const Profile = ({ match, location }) => {
         <h2>{results.address}</h2>
       </div>
       <div className={'profile-body-container'}>
-       
+
         {tabBody}
         {/* <div className={'card-container'}>
           {userItems}

@@ -4,6 +4,7 @@ import validateField from '../lib/validateField'
 
 import { Form } from 'react-bootstrap'
 import Select from 'react-select'
+import '../styles/button.scss'
 
 const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChange, classes }) => {
 

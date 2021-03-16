@@ -60,13 +60,13 @@ const Login = ({ history }) => {
             if (!localStorage) return
             if (!data.token) return
             localStorage.setItem('token', data.token)
-            console.log(localStorage)
-            location.reload()
-            history.push('/browse')
+            // location.reload()
+            console.log('clicked')
+            history.push('/inbox')
           })
           .catch(err => console.log(err.response))
       },
-      classes: ['button is-success']
+      classes: ['button is-success addOn']
     }
   }
 
