@@ -16,6 +16,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 	# threads = fields.Nested('ThreadSchema', many=True)
 	# files = fields.Nested('FileSchema', many=True)
 	items = fields.Nested('ItemSchema', many=True)
+	bookings = fields.Nested('BookingSchema', many=True)
 	password = fields.String(required=True)
 
 

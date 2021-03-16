@@ -15,16 +15,6 @@ export default function Booking({ match, location}) {
   // ! however you like.
   const loggedInUser = getLoggedInUser()
 
-    //   item_id = db.Column(db.Integer, db.ForeignKey('items.id'), nullable=False)
-    // owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    // borrower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    // start_date = db.Column(db.DateTime, nullable=False)
-    // end_date = db.Column(db.DateTime, nullable=False)
-    // owner_decision = db.Column(db.Boolean, nullable=True)
-    // borrower_decision = db.Column(db.Boolean, nullable=True)
-    // approval_status = db.Column(db.Boolean)
-  // console.log(match)
-  // console.log(location)
   const params = new URLSearchParams(location.search)
   const itemId = params.get('item')
 
@@ -46,10 +36,6 @@ export default function Booking({ match, location}) {
       return
     }
 
-    // 2021-03-26T00:00:00+03:00
-    // "2021-03-16T15:13:20.905Z"
-    // Sat Mar 27 2021 15:10:20 GMT+0000 (Greenwich Mean Time)
-
     const bookingObj = {
       itemId: itemResults.id,
       ownerId: itemResults.user_id,
@@ -58,8 +44,6 @@ export default function Booking({ match, location}) {
       endDate: endDate.toISOString(),
       borrowerDecision: true
     }
-
-    console.log(bookingObj)
 
     const axiosConfig = {
       url: '/api/bookings',

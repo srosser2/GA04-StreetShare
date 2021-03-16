@@ -26,6 +26,7 @@ class User(db.Model, BaseModel):
     # messages = db.relationship('Message', backref='users', cascade="all, delete")
     items = db.relationship('Item', backref='users', cascade="all, delete")
     files = db.relationship('File', backref='users', cascade="all, delete")
+    bookings = db.relationship('Booking', backref='users')
 
     # ! The equivalent of a virtual field in sqlalchemy
     # ! This is a temporary field that should be not be saved in db

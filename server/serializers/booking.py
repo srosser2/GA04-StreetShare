@@ -12,8 +12,8 @@ class BookingSchema(ma.SQLAlchemyAutoSchema):
         dateformat = '%Y-%m-%dT%H:%M:%S%z'
 
     item_id = fields.Integer(data_key='itemId')
-    owner_id = fields.Integer(data_key='ownerId', many=True)
-    borrower_id = fields.Integer(data_key='borrowerId', many=True)
+    owner_id = fields.Integer(data_key='ownerId')
+    borrower_id = fields.Integer(data_key='borrowerId')
     start_date = fields.DateTime(data_key='startDate')
     end_date = fields.DateTime(data_key='endDate')
     owner_decision = fields.Boolean(data_key='ownerDecision')

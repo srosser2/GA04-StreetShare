@@ -38,8 +38,11 @@ def create_booking():
 
 
 @router.route("/bookings/<int:booking_id>", methods=["PUT"])
+@secure_route
 def update_booking(booking_id):
     existing_booking = Booking.query.get(booking_id)
+    if existing_booking.owner_id != g.current_user.id: # TODO add borrower_id
+        return { 'message': 'Unauthorized'}
     booking_dictionary = request.json
     try:
         booking = booking_schema.load(
@@ -47,6 +50,7 @@ def update_booking(booking_id):
             instance=existing_booking,
             partial=True
         )
+
     except ValidationError as e:
         return {"errors": e.messages, "messages": "Something went wrong"}
     booking.save()

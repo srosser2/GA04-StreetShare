@@ -5,10 +5,10 @@ router = Blueprint('user_controller', __name__)
 from marshmallow.exceptions import ValidationError
 
 from models.user import User
-# from models.thread import Thread
+# from models.booking import Booking
 from serializers.user import UserSchema
 from serializers.item import ItemSchema
-# from serializers.thread import ThreadSchema
+# from serializers.booking import BookingSchema
 # sending confirmation email
 # import os
 # from sendgrid import SendGridAPIClient
@@ -19,6 +19,7 @@ from decorators.secure_route import secure_route
 # ends here
 user_schema = UserSchema()
 item_schema = ItemSchema()
+# booking_schema = BookingSchema()
 # thread_schema = ThreadSchema()
 
 
@@ -82,6 +83,7 @@ def get_users():
 @router.route('/users/<int:user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     user = User.query.get(user_id)
+
     if not user:
         return {'error': 'User not found.'}
 
