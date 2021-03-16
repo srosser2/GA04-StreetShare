@@ -25,12 +25,7 @@ export const FileUploadProvider = ({ token, children }) => {
     })
   }
 
-  useEffect(() => {
-    console.log('useEffect File Provider')
-  },[fileBase64])
-
   const uploadImageHandler = async () => {
-
 
     if (fileBase64.length <= 0) return
 
@@ -46,12 +41,10 @@ export const FileUploadProvider = ({ token, children }) => {
     }
 
     const imageResponse = await axios.request(axiosConfig).then(({ data })=> {
-      console.log('data')
-      console.log(data)
+ 
       return data
     })
-    console.log('image-response')
-    console.log(imageResponse)
+
     return imageResponse
 
   }
