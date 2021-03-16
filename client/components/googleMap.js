@@ -113,6 +113,7 @@ const MapConfig = () => {
 const MapWrapped = withScriptjs(withGoogleMap(MapConfig));
 const Map = () => {
   return (
+<<<<<<< HEAD
     <>
       <div style={{ width: "90vw", height: "80vh", borderRadius: '20px', boxShadow: '0 5px 8px -2px black', margin: '50px auto ' }}>
         <MapWrapped
@@ -124,6 +125,17 @@ const Map = () => {
       </div>
     </>
   )
+=======
+    <div style={{ width: "90vw", height: "80vh", borderRadius: '20px', boxShadow: '0 5px 8px -2px black', margin: '50px auto ' }}>
+      <MapWrapped
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
+        loadingElement={<div style={{ height: `90%` }} />}
+        containerElement={<div style={{ height: '98%' }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
+    </div>
+  );
+>>>>>>> fd6f17639b031d8b1dd41e32485c21e4ec1b0de5
 }
 
 export default Map

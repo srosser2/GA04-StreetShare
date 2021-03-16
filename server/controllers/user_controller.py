@@ -1,21 +1,27 @@
 from flask import Blueprint, request, g
+
+router = Blueprint('user_controller', __name__)
+
+from marshmallow.exceptions import ValidationError
+
 from models.user import User
 # from models.thread import Thread
 from serializers.user import UserSchema
-from serializers.thread import ThreadSchema
-from marshmallow.exceptions import ValidationError
+from serializers.item import ItemSchema
+# from serializers.thread import ThreadSchema
 # sending confirmation email
-import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-from flask_mail import Mail, Message
+# import os
+# from sendgrid import SendGridAPIClient
+# from sendgrid.helpers.mail import Mail
+# from flask_mail import Mail, Message
 from decorators.secure_route import secure_route
 
 # ends here
 user_schema = UserSchema()
-thread_schema = ThreadSchema()
+item_schema = ItemSchema()
+# thread_schema = ThreadSchema()
 
-router = Blueprint(__name__, 'users')
+
 
 
 @router.route('/register', methods=['POST'])
@@ -52,7 +58,7 @@ def register():
     return user_schema.jsonify(user), 201
 
 
-@ router.route('/login', methods=['POST'])
+@router.route('/login', methods=['POST'])
 def login():
     user_dict = request.json
     user = User.query.filter_by(email=user_dict['email']).first()

@@ -1,6 +1,11 @@
 $light-grey: #f3f3f4;
 
 
+.page-title {
+  font-size: 32px;
+  margin: 10px;
+}
+
 // Navbar
 
 .navbar-container ul {
@@ -44,6 +49,7 @@ $light-grey: #f3f3f4;
 .thread-card {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .thread-card-avatar {
@@ -65,23 +71,30 @@ $light-grey: #f3f3f4;
   font-size: 14px;
 }
 
+.selected-thread {
+  color: coral;
+}
+
+
 // Messages
 
 .message-card {
   display: flex;
+  flex-direction: column;
   margin: 10px;
 }
 
-.message-card-avatar {
-  height: 40px;
-  width: 40px;
-  margin: 10px;
+
+.message-card-info {
+  font-size: 12px;
 }
 
 .message-card-content {
-  flex-grow: 1;
-  // background-color: $light-grey;
-  padding: 10px 20px;
+  background-color: $light-grey;
+  padding: 5px 10px;
+  border-radius: 5px;
+  align-self: flex-start;
+  
 }
 
 
@@ -107,4 +120,51 @@ $light-grey: #f3f3f4;
 .message-card-avatar .avatar {
   height: 40px;
   width: 40px;
+}
+
+
+// Profile
+
+.side-menu-avatar {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+}
+
+.side-menu-avatar img {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+// Table
+
+.item-table > thead > tr {
+  border-bottom: 1px solid $light-grey;
+}
+
+.item-table > thead > tr > th,
+.item-table > tbody > tr > td {
+  padding: 20px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.table-row-item {
+  display: flex;
+  align-items: center;
+}
+
+.table-image-container {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+}
+
+.table-image-container img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 100%;
 }

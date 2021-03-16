@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Map from '../components/googleMap'
 import 'bulma'
 
-const Browse = () => {
+const Browse = ({ history }) => {
 
   const [items, updateItems] = useState([])
   const [users, updateUser] = useState([])
@@ -62,7 +62,7 @@ const Browse = () => {
               <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
                 <div className="columns is-multiline">
                   {items.map((item) => {
-                    return <div key={item.id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
+                    return <div key={item.id} className={!sideCard ? 'column is-one-third' : 'column is-half'} onClick={() => history.push(`/items/${item.id}`)}>
                       <div className="card cardHeight" id={selectedItem.id === item.id ? 'selected' : 'cardHover'} onClick={() => handleSelectedItem(item)}>
                         <div className="card-content">
                           <div className="media">

@@ -1,8 +1,8 @@
 from flask import request, g
-import jwt 
-from models.user import User
+import jwt
 from config.environment import secret
 from functools import wraps
+from models.user import User
 
 def secure_route(func):
 
@@ -32,5 +32,8 @@ def secure_route(func):
             return { 'message': str(e) }, 401
 
         return func(*args, **kwargs)
-    
+
     return wrapper
+
+
+

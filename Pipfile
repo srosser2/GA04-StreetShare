@@ -17,6 +17,10 @@ pyjwt = "*"
 cloudinary = "*"
 sendgrid = "*"
 flask-mail = "*"
+flask-socketio = "*"
+gevent = "*"
+eventlet = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.9"

@@ -1,5 +1,6 @@
 from app import db
 from models.base import BaseModel
+from models.item import Item
 
 class Category(db.Model, BaseModel):
     

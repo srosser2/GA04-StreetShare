@@ -25,7 +25,7 @@ def get_single_booking(booking_id):
 
 
 @router.route("/bookings", methods={"POST"})
-# @secure_route
+@secure_route
 def create_booking():
     booking_dictionary = request.json
     try:
