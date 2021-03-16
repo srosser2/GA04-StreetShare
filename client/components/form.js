@@ -29,7 +29,8 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           control={control}
           name={field}
           render={() => (
-            <Form.Control
+            <input
+              className={config[field].classes ? config[field].classes.join(' '): null}
               onChange={e => onChange(e)}
               value={config[field].value}
               type={config[field].type}
@@ -46,7 +47,8 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           name={field}
           placeholder={config[field].type}
           render={() => (
-            <Form.Control as='textarea'
+            <textarea
+              className={config[field].classes ? config[field].classes.join(' '): null}
               name={field}
               onChange={e => onChange(e)}
               value={config[field].value}
@@ -62,6 +64,7 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           name={field}
           render={() => (
             <Select
+              className={config[field].classes ? config[field].classes.join(' '): null}
               defaultValue={config[field].value}
               options={config[field].options}
               onChange={(e) => onSelectChange(e, field)}
@@ -77,6 +80,7 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           name={field}
           render={() => (
             <input
+              className={config[field].classes ? config[field].classes.join(' '): null}
               type='file'
               onChange={e => onFileChange(e)}
               label={field}

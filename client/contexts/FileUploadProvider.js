@@ -29,6 +29,8 @@ export const FileUploadProvider = ({ token, children }) => {
 
     if (fileBase64.length <= 0) return
 
+    updateFileIsUploading(true)
+
     const axiosConfig = {
       url: '/api/files',
       method: 'post',
@@ -44,6 +46,8 @@ export const FileUploadProvider = ({ token, children }) => {
  
       return data
     })
+
+    updateFileIsUploading(false)
 
     return imageResponse
 
