@@ -33,10 +33,6 @@ const loggedInUser = getLoggedInUser()
 
 const App = () => (
   <BrowserRouter>
-<<<<<<< HEAD
-=======
-
->>>>>>> development
     <SocketProvider id={loggedInUser.sub} token={token}>
       <ThreadProvider>
         <FileUploadProvider token={token}>
