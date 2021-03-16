@@ -21,4 +21,4 @@ app.register_blueprint(socket_controller.router)
 
 if __name__ == '__main__':
     print('app.run')
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=False)

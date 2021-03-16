@@ -48,7 +48,7 @@ const App = () => (
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/booking" component={Booking} />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </FileUploadProvider>
       </ThreadProvider>
     </SocketProvider>

@@ -7,7 +7,8 @@ class Booking(db.Model, BaseModel):
 
     item_id = db.Column(db.Integer, db.ForeignKey('items.id'), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    borrower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    borrower_id = db.Column(db.Integer, nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
     owner_decision = db.Column(db.Boolean, nullable=True)

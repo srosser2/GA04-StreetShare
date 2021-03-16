@@ -5,6 +5,9 @@ import axios from 'axios'
 
 import Form from '../components/form'
 import SideDraw from '../components/sideDraw'
+import ItemTab from '../components/profile/itemTab'
+import BookingTab from '../components/profile/bookingTab'
+
 
 import { getLoggedInUser } from '../lib/auth'
 import useAxios from '../hooks/useAxios'
@@ -20,6 +23,7 @@ const Profile = ({ match, location }) => {
   const token = localStorage.getItem('token')
 
   const { loading, results, error } = useAxios({ url: `/api/users/${match.params.id}`, method: 'get' })
+  const { loading: bookingLoading, results: bookingResults, error: bookingError } = useAxios({ url: `/api/users/${match.params.id}/bookings`, method: 'get' })
   const { selectedFile, updateSelectedFile, getBase64, fileBase64, uploadImageHandler, fileIsUploading } = useFileUploads()
   const { loading: categoriesLoading, results: categoryResults, error: categoryError } = useAxios({ url: '/api/categories', method: 'get' })
   const [showSideDraw, updateShowSideDraw] = useState(false)
@@ -131,6 +135,8 @@ const Profile = ({ match, location }) => {
     }
   ]
 
+
+
   const sideMenu = sideMenuItems.map((menuItem, i) => {
     return (
       <div key={i}>
@@ -152,44 +158,7 @@ const Profile = ({ match, location }) => {
     </div>
   })
 
-  const itemTable = results.items.map(item => {
-    return <tr key={item.id} className={'table-row'} >
-      <td>
-        <div className={'table-row-item'}>
-          <div className={'table-image-container'}>
-            <img src={item.image} />
-          </div>
-          <p>{item.title}</p>
-        </div>
-      </td>
-      <td>{item.category}</td>
-      <td>{item.description}</td>
-      <td>Status</td>
-    </tr>
-  })
-
-  const itemTab = <>
-    <div>
-      <h2>My Items</h2>
-      <button onClick={() => updateShowSideDraw(true)}>Upload new item</button>
-    </div>
-    <div>
-      <table className={'item-table'}>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {itemTable}
-        </tbody>
-      </table>
-    </div>
-  </>
-
+  console.log(bookingResults)
   const bookingsTab = <>
     <div>
       <h2>My Bookings</h2>
@@ -259,13 +228,15 @@ const Profile = ({ match, location }) => {
   
   let tabBody
 
+  console.log(results.items)
+
   switch (currentTab) {
     case ITEMS: {
-      tabBody = itemTab
+      tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} />
       break
     }
     case BOOKINGS: {
-      tabBody = bookingsTab
+      tabBody = <BookingTab bookings={results.bookings} showSideDrawHandler={updateShowSideDraw} />
       break
     }
     case BORROWING: {
