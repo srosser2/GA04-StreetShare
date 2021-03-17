@@ -123,17 +123,17 @@ const Profile = ({ match, location }) => {
 
   const sideMenuItems = [
     {
-      label: 'My Item',
-      img: <img style={{ marginRight: '15px' }} src="https://img.icons8.com/dusk/30/000000/package.png" />,
+      label: 'My Items',
+      img: "https://img.icons8.com/dusk/30/000000/package.png",
       link: `/profile/${match.params.id}?tab=${ITEMS}`
     },
     {
       label: ' My Booking Agreements',
-      img: <img style={{ marginRight: '15px' }} src="https://img.icons8.com/dusk/30/000000/agreement.png" />,
+      img: "https://img.icons8.com/dusk/30/000000/agreement.png",
       link: `/profile/${match.params.id}?tab=${BOOKINGS}`
     },
     {
-      img: <img style={{ marginRight: '15px' }} src="https://img.icons8.com/dusk/30/000000/cancel-subscription.png" />,
+      img: "https://img.icons8.com/dusk/30/000000/cancel-subscription.png",
       label: ' My Borrowing Agreements',
       link: `/profile/${match.params.id}?tab=${BORROWING}`
     }
@@ -143,8 +143,9 @@ const Profile = ({ match, location }) => {
 
   const sideMenu = sideMenuItems.map((menuItem, i) => {
     return (
-      <div style={{ margin: '15px 15px' }} key={i}>
-        <NavLink to={menuItem.link}>{menuItem.img}{menuItem.label}</NavLink>
+      <div style={{ margin: '30px 30px', display: 'flex', alignItems: 'center' }} key={i}>
+        <img src={menuItem.img} style={{ marginRight: '15px' }} />
+        <NavLink to={menuItem.link} style={{ fontSize: '14px' }}>{menuItem.label}</NavLink>
       </div>
     )
   })
@@ -178,29 +179,6 @@ const Profile = ({ match, location }) => {
     </tr>
   })
 
-  const itemTab = <>
-    <div>
-      <h2>My Items</h2>
-      <button style={{ marginTop: '10px' }} className='button is-info' onClick={() => updateShowSideDraw(true)}>Upload new item</button>
-    </div>
-    <div>
-      <table className={'item-table'}>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {itemTable}
-        </tbody>
-      </table>
-    </div>
-  </>
-
-  console.log(bookingResults)
   const bookingsTab = <>
     <div>
       <h2>My Bookings</h2>
@@ -283,6 +261,10 @@ const Profile = ({ match, location }) => {
     }
     case BORROWING: {
       tabBody = borrowingTab
+      break
+    }
+    default: {
+      tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} />
       break
     }
   }

@@ -9,7 +9,7 @@ const Browse = ({ history }) => {
 
   const [items, updateItems] = useState([])
   const [users, updateUser] = useState([])
-  const [toggle, updateToggle] = useState(false)
+  const [toggle, updateToggle] = useState(true)
   const [sideCard, revealSideCard] = useState(false)
   const [selectedItem, updateselectedItem] = useState({
     id: '',
@@ -83,7 +83,7 @@ const Browse = ({ history }) => {
                                 <p className="subtitle is-6">Note: {item.note}</p>
                                 {/* <p className="subtitle is-6">Description: {item.description}</p> */}
                                 <figure className="image is-3by2 mb-2">
-                                  <img src={item.image} alt={item.title} />
+                                  <img src={item.image} alt={item.title} style={{ objectFit: 'contain'}} />
                                 </figure>
                               </div>
                             </div>

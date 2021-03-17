@@ -14,7 +14,8 @@ const RegisterAndLogin = ({ history }) => {
             {Register()}
           </div>
           <div className="column is-half">
-            {Login(history)}
+            {/* {Login(history)} */}
+            {<Login history={history} />}
           </div>
         </div>
       </div>
