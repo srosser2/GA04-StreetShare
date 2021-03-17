@@ -33,7 +33,7 @@ export const ThreadProvider = ({ id, children }) => {
     if (socket == null) return
 
     socket.on('connect', () => {
-      console.log('connected to the socket bro')
+
     })
 
     socket.on('recieve-message', message => {

@@ -151,33 +151,33 @@ const Profile = ({ match, location }) => {
   })
 
 
-  const userItems = results.items.map(item => {
-    return <div key={item.id} className={'card'}>
-      <div className={'card-image-container'}>
-        <img src={item.image} />
-      </div>
-      <div className={'card-description-container'}>
-        <h4>{item.title}</h4>
-        <p>{item.description}</p>
-      </div>
-    </div>
-  })
+  // const userItems = results.items.map(item => {
+  //   return <div key={item.id} className={'card'}>
+  //     <div className={'card-image-container'}>
+  //       <img src={item.image} />
+  //     </div>
+  //     <div className={'card-description-container'}>
+  //       <h4>{item.title}</h4>
+  //       <p>{item.description}</p>
+  //     </div>
+  //   </div>
+  // })
 
-  const itemTable = results.items.map(item => {
-    return <tr key={item.id} className={'table-row'} >
-      <td>
-        <div className={'table-row-item'}>
-          <div className={'table-image-container'}>
-            <img src={item.image} />
-          </div>
-          <p>{item.title}</p>
-        </div>
-      </td>
-      <td>{item.category}</td>
-      <td>{item.description}</td>
-      <td>Status</td>
-    </tr>
-  })
+  // const itemTable = results.items.map(item => {
+  //   return <tr key={item.id} className={'table-row'} >
+  //     <td>
+  //       <div className={'table-row-item'}>
+  //         <div className={'table-image-container'}>
+  //           <img src={item.image} />
+  //         </div>
+  //         <p>{item.title}</p>
+  //       </div>
+  //     </td>
+  //     <td>{item.category}</td>
+  //     <td>{item.description}</td>
+  //     <td>Status</td>
+  //   </tr>
+  // })
 
   const bookingsTab = <>
     <div>
@@ -250,7 +250,7 @@ const Profile = ({ match, location }) => {
 
   switch (currentTab) {
     case ITEMS: {
-      tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} />
+      tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} match={1} />
       break
     }
     case BOOKINGS: {
@@ -262,7 +262,7 @@ const Profile = ({ match, location }) => {
       break
     }
     default: {
-      tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} />
+      tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} match={match} />
     }
   }
 

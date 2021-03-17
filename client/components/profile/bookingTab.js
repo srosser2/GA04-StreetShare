@@ -72,7 +72,6 @@ export default function BookingTab({ bookings, showSideDrawHandler }) {
   <>
     <div>
       <h2>My Items</h2>
-      <button onClick={() => showSideDrawHandler(true)}>Upload new item</button>
     </div>
     <div>
       <table className={'item-table'}>

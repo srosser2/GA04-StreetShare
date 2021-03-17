@@ -47,6 +47,8 @@ $light-grey: #f3f3f4;
 // Thread Card
 
 .thread-card {
+  border: 2px solid #fff;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -72,7 +74,7 @@ $light-grey: #f3f3f4;
 }
 
 .selected-thread {
-  color: coral;
+  border-left: 2px solid rgb(50, 115, 220);
 }
 
 
