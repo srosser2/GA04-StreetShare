@@ -3,6 +3,7 @@ import useAxios from '../hooks/useAxios'
 import axios from 'axios'
 import { getLoggedInUser } from '../lib/auth'
 import { useSocket } from './SocketProvider'
+import { useLocation, useHistory } from 'react-router-dom'
 
 const ThreadContext = React.createContext()
 
@@ -15,9 +16,14 @@ export const ThreadProvider = ({ id, children }) => {
   const loggedInUser = getLoggedInUser()
   const token = localStorage.getItem('token')
 
-  const [selectedThreadId, updateSelectedThreadId] = useState(0)
-  const socket = useSocket()
+  const location = useLocation()
+  const history = useHistory()
 
+  const params = new URLSearchParams(location.search)
+  const t = Number(params.get('thread'))
+
+  const [selectedThreadId, updateSelectedThreadId] = useState(t)
+  const socket = useSocket()
 
   const axiosThreadRequest = {
     url: `/api/users/${loggedInUser.sub}/threads`,
@@ -26,6 +32,15 @@ export const ThreadProvider = ({ id, children }) => {
       Authorization: `Bearer ${token}`
     }
   }
+
+
+  useEffect(() => {
+    return history.listen((location) => { 
+        const params = new URLSearchParams(location.search)
+        const t = Number(params.get('thread'))
+        updateSelectedThreadId(t)
+      }) 
+  }, [location])
 
   const { loading: threadLoading, results: threads, setResults: updateThreads, errors: threadErrors } = useAxios(axiosThreadRequest)
 

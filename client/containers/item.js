@@ -25,17 +25,21 @@ const Item = ({ match, history }) => {
     return <h1>Item not found</h1>
   }
 
+  const contactButtons = <div>
+      <button onClick={() => console.log('Contact the owner - redirect to inbox')}>Contact owner</button>
+      <button onClick={() => history.push(`/booking?item=${results.id}`)}>Arrange booking</button>
+    </div>
+
   return <div className={'container'} style={{ maxWidth: '720px'}}>
     <h1>{results.title}</h1>
     <p>{results.description}</p>
     <div>
       <img src={results.image} alt={results.title} className={''} style={{ objectFit: 'contain', width: '400px', height: '400px'}}/>
     </div>
-    <div>
-      <button onClick={() => console.log('Contact the owner - redirect to inbox')}>Contact owner</button>
-      <button onClick={() => history.push(`/booking?item=${results.id}`)}>Arrange booking</button>
-    </div>
+    
     <p>{results.note}</p>
+
+    {results.user_id === currentUser.sub ? 'your stuff': contactButtons}
 
   </div>
 }
