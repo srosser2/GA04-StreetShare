@@ -1,6 +1,6 @@
 from flask import request
 from app import app, socketio
-
+import os
 from controllers import user_controller
 from controllers import category_controller
 from controllers import item_controller
@@ -18,6 +18,19 @@ app.register_blueprint(message_controller.router, url_prefix='/api')
 app.register_blueprint(file_controller.router, url_prefix='/api')
 app.register_blueprint(booking_controller.router, url_prefix='/api')
 app.register_blueprint(socket_controller.router)
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    dirname = os.path.dirname(__file__)
+    filename = os.path.join(dirname, 'dist/' + path)
+
+    if os.path.isfile(filename):
+        return app.send_static_file(path)
+
+    return app.send_static_file('index.html')
+
 
 if __name__ == '__main__':
     print('app.run')

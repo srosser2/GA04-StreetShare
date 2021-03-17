@@ -35,11 +35,11 @@ export const ThreadProvider = ({ id, children }) => {
 
 
   useEffect(() => {
-    return history.listen((location) => { 
-        const params = new URLSearchParams(location.search)
-        const t = Number(params.get('thread'))
-        updateSelectedThreadId(t)
-      }) 
+    return history.listen((location) => {
+      const params = new URLSearchParams(location.search)
+      const t = Number(params.get('thread'))
+      updateSelectedThreadId(t)
+    })
   }, [location])
 
   const { loading: threadLoading, results: threads, setResults: updateThreads, errors: threadErrors } = useAxios(axiosThreadRequest)
@@ -76,15 +76,15 @@ export const ThreadProvider = ({ id, children }) => {
 
   let conversationsData = []
 
-  if (threads && threads.length > 0) {
-    conversationsData = threads.map(thread => { 
-      return {
-        id: thread.id,
-        messages: thread.messages,
-        users: thread.users
-      }
-    })
-  }
+  // if (Array.isArray(threads) && threads.length > 0) {
+  //   conversationsData = threads.map(thread => {
+  //     return {
+  //       id: thread.id,
+  //       messages: thread.messages,
+  //       users: thread.users
+  //     }
+  //   })
+  // }
 
   const value = {
     threadLoading,
@@ -94,11 +94,11 @@ export const ThreadProvider = ({ id, children }) => {
     conversationsData,
     sendMessage
   }
-  
+
   return (
-  <ThreadContext.Provider value={value}>
-    { children }
-  </ThreadContext.Provider>
+    <ThreadContext.Provider value={value}>
+      { children}
+    </ThreadContext.Provider>
   )
 
 }
