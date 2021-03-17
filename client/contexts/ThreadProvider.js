@@ -16,6 +16,9 @@ export const ThreadProvider = ({ id, children }) => {
   const loggedInUser = getLoggedInUser()
   const token = localStorage.getItem('token')
 
+  if (!loggedInUser) {
+    return children
+  }
   const location = useLocation()
   const history = useHistory()
 
@@ -24,6 +27,8 @@ export const ThreadProvider = ({ id, children }) => {
 
   const [selectedThreadId, updateSelectedThreadId] = useState(t)
   const socket = useSocket()
+
+  if (socket === null) alert('Socket does not exist')
 
   const axiosThreadRequest = {
     url: `/api/users/${loggedInUser.sub}/threads`,
@@ -42,7 +47,9 @@ export const ThreadProvider = ({ id, children }) => {
     })
   }, [location])
 
+
   const { loading: threadLoading, results: threads, setResults: updateThreads, errors: threadErrors } = useAxios(axiosThreadRequest)
+
 
   useEffect(() => {
     if (socket == null) return
@@ -52,10 +59,7 @@ export const ThreadProvider = ({ id, children }) => {
     })
 
     socket.on('recieve-message', message => {
-      console.log('message recieved')
       const parsedMessage = JSON.parse(message)
-      console.log(parsedMessage)
-
 
       updateThreads(prevThreads => {
         const updatedThreads = [...prevThreads]
@@ -69,8 +73,8 @@ export const ThreadProvider = ({ id, children }) => {
   }, [socket, selectedThreadId])
 
 
-  const sendMessage = ({ text, recipients, threadId }) => {
-    socket.emit('send-message', text, recipients, threadId)
+  const sendMessage = ({ text, recipients, threadId, token }) => {
+    socket.emit('send-message', text, recipients, threadId, token)
   }
 
 

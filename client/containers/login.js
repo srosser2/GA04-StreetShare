@@ -57,14 +57,13 @@ const Login = ({ history }) => {
           formData[field] = loginForm[field].value
           loginForm[field].dirty = true
         }
-        const { data } = await axios.post('/api/login', formData)
+        await axios.post('/api/login', formData)
           .then(({ data }) => {
             if (!localStorage) return
             if (!data.token) return
             localStorage.setItem('token', data.token)
 
             const currentUser = getLoggedInUser()
-
             history.push(`/profile/${currentUser.sub}`)
           })
           .catch(err => console.log(err.response))

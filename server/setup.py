@@ -19,18 +19,16 @@ app.register_blueprint(file_controller.router, url_prefix='/api')
 app.register_blueprint(booking_controller.router, url_prefix='/api')
 app.register_blueprint(socket_controller.router)
 
-
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/', defaults={'path': ''}) # homepage
+@app.route('/<path:path>') # any other path
 def catch_all(path):
     dirname = os.path.dirname(__file__)
     filename = os.path.join(dirname, 'dist/' + path)
 
-    if os.path.isfile(filename):
+    if os.path.isfile(filename): # if path is a file, send it back
         return app.send_static_file(path)
 
-    return app.send_static_file('index.html')
-
+    return app.send_static_file('index.html') # otherwise send back the index.html file
 
 if __name__ == '__main__':
     print('app.run')

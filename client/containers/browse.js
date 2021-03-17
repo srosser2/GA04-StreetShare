@@ -28,12 +28,12 @@ const Browse = ({ history }) => {
       title: title,
       category: category,
       note: note,
-      description: description,
+      // description: description,
       image: image,
       user_id: user_id,
       bookings: bookings,
     }
-    updateselectedLocation(itemDetails)
+    // updateselectedLocation(itemDetails)
     if (!sideCard) {
       revealSideCard(true)
     }

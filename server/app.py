@@ -19,5 +19,4 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 mail = Mail(app)
 bcrypt = Bcrypt(app)
-socketio = SocketIO(app, cors_allowed_origins=[
-                    "http://localhost:8001", "http://localhost:5000"])
+socketio = SocketIO(app, cors_allowed_origins=["http://localhost:8001", "http://localhost:5000"])

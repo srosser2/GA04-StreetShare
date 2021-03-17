@@ -1,6 +1,8 @@
 from flask import Blueprint, request, g
 from app import socketio
+from config.environment import secret
 import json
+import jwt
 from flask_socketio import emit, join_room, leave_room
 from models.user import User
 from models.thread import Thread
@@ -20,20 +22,33 @@ def connected():
     id = request.args.get('id')
 
 @socketio.on('send-message')
-def handle_event(text, recipients, threadId, methods=['GET', 'POST']):
-    user_id = request.args.get('id')
-    token = request.args.get('token')
-    user = User.query.get(user_id)
-    join_room(threadId)
+def handle_event(text, recipients, thread_id, token, methods=['GET', 'POST']):
 
-    message_dict = { 'content': text, 'recipients': recipients, 'threadId': threadId, 'user': {
+    if not token:
+        print('Not token')
+        return {'message': 'Unauthorized'}, 401
+
+    try:
+        payload = jwt.decode(token, secret, 'HS256')
+        user_id = payload['sub']
+        user = User.query.get(user_id)
+    
+    except Exception as e:
+        return { 'message': 'User not found'}
+
+    if not user:
+        return { 'message': 'Unauthorized' }, 401
+
+    message_dict = { 'content': text, 'recipients': recipients, 'threadId': thread_id, 'user': {
         'firstName': user.first_name,
         'lastName': user.last_name,
         'id': user.id,
         'profile_pic': user.profile_pic
     }}
 
-    thread = Thread.query.get(threadId)
+    join_room(thread_id)
+
+    thread = Thread.query.get(thread_id)
     if not user in thread.users:
         print('something went wrong')
         return { 'message': 'Not your thread'}
@@ -49,4 +64,4 @@ def handle_event(text, recipients, threadId, methods=['GET', 'POST']):
     thread.save()
     message_dict['id'] = message.id
 
-    socketio.emit('recieve-message', json.dumps(message_dict), room=threadId)
+    socketio.emit('recieve-message', json.dumps(message_dict), room=thread_id)
