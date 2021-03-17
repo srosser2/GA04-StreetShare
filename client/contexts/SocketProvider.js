@@ -8,6 +8,10 @@ export const useSocket = () => {
 }
 
 export const SocketProvider = ({ id, token, children }) => {
+
+  // if (!id) return children
+  // if (!token) return children
+
   const [socket, setSocket] = useState()
 
   useEffect(() => {

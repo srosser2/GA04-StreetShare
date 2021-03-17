@@ -7,13 +7,16 @@ import { Link } from 'react-router-dom'
 export default function Threads({ history }) {
   
   const loggedInUser = getLoggedInUser()
+  const token = localStorage.getItem('token')
+
+  if (!loggedInUser) {
+    return <div>Please Log In</div>
+  }
 
   const { threads, selectedThreadId, updateSelectedThreadId } = useThreads()
 
   const threadCards = threads.map((thread) => {
     const classes = ['thread-card']
-
-
     const threadUsersWithoutCurrentUser = thread.users.filter(user => user.id !== loggedInUser.sub)
     const threadUsersMapped = threadUsersWithoutCurrentUser.map(user => `${user.firstName} ${user.lastName}`)
     const threadUsers = threadUsersMapped.join(', ')

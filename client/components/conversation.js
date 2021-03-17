@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom'
 export default function Conversation() {
 
   const loggedInUser = getLoggedInUser()
+  const token = localStorage.getItem('token')
 
   const location = useLocation()
 
@@ -25,15 +26,22 @@ export default function Conversation() {
     }
   })
 
+  if (!token || !loggedInUser) {
+    return <div>Please log in.</div>
+  }
+
   const { threads, threadLoading, conversationsData, selectedThreadId, sendMessage } = useThreads()
 
   if (threadLoading) {
     return <h2>Loading</h2>
   }
 
+  if (!threads) {
+    threads = []
+  }
+
   const params = new URLSearchParams(location.search)
   const t = params.get('thread')
-  console.log(t)
 
   let conversation
 
@@ -46,7 +54,6 @@ export default function Conversation() {
     }
 
     if (t === 'new') {
-      console.log('newwwwe')
       currentThread = {
         messages: [],
         users: [{
@@ -103,8 +110,7 @@ export default function Conversation() {
           recipients = [1, 2],
           threadId = 'new'
         }
-        
-        sendMessage({ text, recipients, threadId })
+        sendMessage({ text, recipients, threadId, token })
         messageForm.message.value = ''
       },
       classes: []

@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode=development",
-    "seed": "pipenv run python backend/seed.py",
-    "build": "pipenv install; npm i; webpack -p"
+    "build": "pipenv install; npm i; webpack -p",
+    "start": "pipenv run python server/setup.py",
+    "start-dev": "webpack-dev-server --mode=development",
+    "seed": "pipenv run python server/seed.py"
   },
   "author": "",
   "license": "ISC",

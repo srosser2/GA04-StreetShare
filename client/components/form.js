@@ -80,13 +80,13 @@ const FormGenerator = ({ config, controls, onChange, onFileChange, onSelectChang
           control={control}
           name={field}
           render={() => (
-            <div class="file is-info has-name">
-              <label class="file-label">
-                <input class="file-input" type="file" name="resume" onChange={e => onFileChange(e)} />
-                <span class="file-cta">
-                  <span class="file-icon">
+            <div className="file is-info has-name">
+              <label className="file-label">
+                <input className="file-input" type="file" name="resume" onChange={e => onFileChange(e)} />
+                <span className="file-cta">
+                  <span className="file-icon">
                   </span>
-                  <span class="file-label">
+                  <span className="file-label">
                     Choose Image to Upload</span>
                 </span>
               </label>

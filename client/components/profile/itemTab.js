@@ -6,14 +6,10 @@ export default function ItemTab({ items, showSideDrawHandler, match }) {
 
   const currentUser = getLoggedInUser()
 
-  // let id = match.params.id.split('?')[0]
-
-  console.log(match.params)
-  // console.log(currentUser.sub)
-
+ 
   let uploadButton
   // if (currentUser.sub === Number(match.params.id)) {
-  //   uploadButton = <button onClick={() => showSideDrawHandler(true)}>Upload new item</button>
+    uploadButton = <button onClick={() => showSideDrawHandler(true)}>Upload new item</button>
   // }
 
 
