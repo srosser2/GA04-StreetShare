@@ -228,8 +228,6 @@ const Profile = ({ match, location }) => {
   
   let tabBody
 
-  console.log(results.items)
-
   switch (currentTab) {
     case ITEMS: {
       tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} />
@@ -242,6 +240,9 @@ const Profile = ({ match, location }) => {
     case BORROWING: {
       tabBody = borrowingTab
       break
+    }
+    default: {
+      tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} />
     }
   }
 

@@ -6,9 +6,11 @@ from models.user import User
 from models.thread import Thread
 from models.message import Message
 from serializers.user import UserSchemaBasic
+from serializers.message import MessageSchema
 
 
 user_schema = UserSchemaBasic()
+message_schema = UserSchemaBasic()
 
 router = Blueprint(__name__, 'sockets')
 
@@ -41,8 +43,10 @@ def handle_event(text, recipients, threadId, methods=['GET', 'POST']):
     except ValidationError as e:
         print('validation error')
         return {'errors': e.messages, 'messages': 'Something went wrong'}
-    
+
+    message.save()
     thread.messages.append(message)
     thread.save()
+    message_dict['id'] = message.id
 
     socketio.emit('recieve-message', json.dumps(message_dict), room=threadId)

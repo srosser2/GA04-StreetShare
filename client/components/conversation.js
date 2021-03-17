@@ -22,7 +22,7 @@ export default function Conversation() {
     }
   })
 
-  const { threads, threadLoading, conversationsData, selectedThreadIndex, sendMessage } = useThreads()
+  const { threads, threadLoading, conversationsData, selectedThreadId, sendMessage } = useThreads()
 
   if (threadLoading) {
     return <h2>Loading</h2>
@@ -31,7 +31,13 @@ export default function Conversation() {
   let conversation
 
   if (Array.isArray(conversationsData) && conversationsData.length > 0) {
-    conversation = conversationsData[selectedThreadIndex].map((message, i) => {
+    const currentThread = conversationsData.find(thread => thread.id === selectedThreadId)
+    if (!currentThread) {
+      return <div style={{ alignSelf: 'center' }}>Select a Thread</div>
+    }
+
+
+    conversation = currentThread.messages.map(message => {
 
       let messageCardStyle = {}
       let messageCardInfoStyle = {}
@@ -43,7 +49,6 @@ export default function Conversation() {
         messageCardContentStyle.color = 'white'
         messageCardContentStyle.alignSelf = 'flex-end'
       }
-
       return <div 
         key={message.id}
         className={'message-card'}
@@ -66,10 +71,11 @@ export default function Conversation() {
     submit: {
       label: 'Send',
       handler: () => {
+        const currentThread = conversationsData.find(thread => thread.id === selectedThreadId)
         const text = messageForm.message.value
         if (text.length < 1) return
-        const recipients = threads[selectedThreadIndex].users.map(user => user.id)
-        const threadId = threads[selectedThreadIndex].id
+        const recipients = currentThread.users.map(user => user.id)
+        const threadId = currentThread.id
         const sender = loggedInUser.sub
         sendMessage({ text, recipients, threadId })
         messageForm.message.value = ''

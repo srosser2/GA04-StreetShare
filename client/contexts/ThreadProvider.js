@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react'
 import useAxios from '../hooks/useAxios'
+import axios from 'axios'
 import { getLoggedInUser } from '../lib/auth'
 import { useSocket } from './SocketProvider'
 
@@ -14,12 +15,9 @@ export const ThreadProvider = ({ id, children }) => {
   const loggedInUser = getLoggedInUser()
   const token = localStorage.getItem('token')
 
-  const [selectedThreadIndex, updateSelectedThreadIndex] = useState(0)
+  const [selectedThreadId, updateSelectedThreadId] = useState(0)
   const socket = useSocket()
 
-  useEffect(() => {
-    console.log(selectedThreadIndex)
-  }, [selectedThreadIndex])
 
   const axiosThreadRequest = {
     url: `/api/users/${loggedInUser.sub}/threads`,
@@ -33,19 +31,27 @@ export const ThreadProvider = ({ id, children }) => {
 
   useEffect(() => {
     if (socket == null) return
+
+    socket.on('connect', () => {
+      console.log('connected to the socket bro')
+    })
+
     socket.on('recieve-message', message => {
+      console.log('message recieved')
       const parsedMessage = JSON.parse(message)
-      parsedMessage.id = Math.random()
+      console.log(parsedMessage)
+
+
       updateThreads(prevThreads => {
         const updatedThreads = [...prevThreads]
-        updatedThreads[selectedThreadIndex].messages.push(parsedMessage)
+        const threadToUpdate = updatedThreads.find(thread => thread.id === parsedMessage.threadId)
+        threadToUpdate.messages.push(parsedMessage)
         return updatedThreads
       })
-      
     })
 
     return () => socket.off('recieve-message')
-  }, [socket, selectedThreadIndex])
+  }, [socket, selectedThreadId])
 
 
   const sendMessage = ({ text, recipients, threadId }) => {
@@ -55,17 +61,21 @@ export const ThreadProvider = ({ id, children }) => {
 
   let conversationsData = []
 
-  if (threads && threads[selectedThreadIndex]) {
-    conversationsData = threads.map(thread => {
-      return thread.messages
+  if (threads && threads.length > 0) {
+    conversationsData = threads.map(thread => { 
+      return {
+        id: thread.id,
+        messages: thread.messages,
+        users: thread.users
+      }
     })
   }
 
   const value = {
     threadLoading,
     threads,
-    selectedThreadIndex,
-    updateSelectedThreadIndex,
+    selectedThreadId,
+    updateSelectedThreadId,
     conversationsData,
     sendMessage
   }

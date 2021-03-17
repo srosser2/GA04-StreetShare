@@ -1,25 +1,34 @@
 import React from 'react'
 import { useThreads } from '../contexts/ThreadProvider'
 import blankAvatar from '../assets/blank-avatar.png'
+import { getLoggedInUser } from '../lib/auth'
 
 export default function Threads() {
-  const { threads, selectedThreadIndex, updateSelectedThreadIndex } = useThreads()
+  
+  const loggedInUser = getLoggedInUser()
 
-  const threadCards = threads.map((thread, i) => {
+  const { threads, selectedThreadId, updateSelectedThreadId } = useThreads()
+
+  const threadCards = threads.map((thread) => {
     const classes = ['thread-card']
-    if (i === selectedThreadIndex) {
+
+
+    const threadUsersWithoutCurrentUser = thread.users.filter(user => user.id !== loggedInUser.sub)
+    const threadUsersMapped = threadUsersWithoutCurrentUser.map(user => `${user.firstName} ${user.lastName}`)
+    const threadUsers = threadUsersMapped.join(', ')
+
+    if (thread.id === selectedThreadId) {
       classes.push('selected-thread')
     }
-    return <div key={i} className={classes.join(' ')} onClick={() => {
-      updateSelectedThreadIndex(i)
-      console.log(selectedThreadIndex)
+    return <div key={thread.id} className={classes.join(' ')} onClick={() => {
+      updateSelectedThreadId(thread.id)
       }
     }>
       <div className={'thread-card-avatar'}>
         <img src={blankAvatar} className={'avatar'}/>
       </div>
       <div className={'thread-card-content'}>
-        <h4>{thread.users[1].firstName} {thread.users[1].lastName}</h4>
+        <h4>{threadUsers}</h4>
         <p>{thread.messages[thread.messages.length - 1].content}</p>
       </div>
     </div>
