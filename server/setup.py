@@ -32,5 +32,5 @@ def catch_all(path):
     return app.send_static_file('index.html') # otherwise send back the index.html file
 
 if __name__ == '__main__':
-    print('app.run')
-    socketio.run(app, debug=True)
+    port = int(os.getenv('PORT', 5000))
+    socketio.run(app, host='0.0.0.0', port=port, debug=False)
