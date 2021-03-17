@@ -2,8 +2,9 @@ import React from 'react'
 import { useThreads } from '../contexts/ThreadProvider'
 import blankAvatar from '../assets/blank-avatar.png'
 import { getLoggedInUser } from '../lib/auth'
+import { Link } from 'react-router-dom'
 
-export default function Threads() {
+export default function Threads({ history }) {
   
   const loggedInUser = getLoggedInUser()
 
@@ -20,8 +21,14 @@ export default function Threads() {
     if (thread.id === selectedThreadId) {
       classes.push('selected-thread')
     }
-    return <div key={thread.id} className={classes.join(' ')} onClick={() => {
-      updateSelectedThreadId(thread.id)
+    return <div 
+      key={thread.id}
+      className={classes.join(' ')} 
+      onClick={() => {
+        history.push(`/inbox?thread=${thread.id}`)
+        const params = new URLSearchParams(location.search)
+        const t = Number(params.get('thread'))
+        updateSelectedThreadId(t)
       }
     }>
       <div className={'thread-card-avatar'}>

@@ -10,8 +10,8 @@ const Inbox = ({ history, match }) => {
     <div className={'container'}>
       <h1 className={'page-title'}>Inbox</h1>
       <div className={'inbox-container'}>
-        <Threads />
-        <Conversation />
+        <Threads history={history}/>
+        <Conversation history={history} />
       </div>
     </div>
     <Footer />

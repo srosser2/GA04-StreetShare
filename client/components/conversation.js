@@ -3,10 +3,13 @@ import { useThreads } from '../contexts/ThreadProvider'
 import Form from '../components/form'
 import moment from 'moment'
 import { getLoggedInUser } from '../lib/auth'
+import { useLocation } from 'react-router-dom'
 
 export default function Conversation() {
 
   const loggedInUser = getLoggedInUser()
+
+  const location = useLocation()
 
   const [messageForm, updateMessageForm] = useState({
     message: {
@@ -28,12 +31,28 @@ export default function Conversation() {
     return <h2>Loading</h2>
   }
 
+  const params = new URLSearchParams(location.search)
+  const t = params.get('thread')
+  console.log(t)
+
   let conversation
 
   if (Array.isArray(conversationsData) && conversationsData.length > 0) {
-    const currentThread = conversationsData.find(thread => thread.id === selectedThreadId)
-    if (!currentThread) {
+
+    let currentThread = conversationsData.find(thread => thread.id === selectedThreadId)
+
+    if (!currentThread && t !== 'new') {
       return <div style={{ alignSelf: 'center' }}>Select a Thread</div>
+    }
+
+    if (t === 'new') {
+      console.log('newwwwe')
+      currentThread = {
+        messages: [],
+        users: [{
+          id: 1
+        }]
+      }
     }
 
 
@@ -71,12 +90,20 @@ export default function Conversation() {
     submit: {
       label: 'Send',
       handler: () => {
-        const currentThread = conversationsData.find(thread => thread.id === selectedThreadId)
         const text = messageForm.message.value
         if (text.length < 1) return
-        const recipients = currentThread.users.map(user => user.id)
-        const threadId = currentThread.id
-        const sender = loggedInUser.sub
+        let recipients
+        let threadId
+        if (t !== 'new') {
+          const currentThread = conversationsData.find(thread => thread.id === selectedThreadId)
+          recipients = currentThread.users.map(user => user.id)
+          threadId = currentThread.id
+        }
+        if (t === 'new') {
+          recipients = [1, 2],
+          threadId = 'new'
+        }
+        
         sendMessage({ text, recipients, threadId })
         messageForm.message.value = ''
       },
