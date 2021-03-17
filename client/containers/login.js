@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Form from '../components/form'
 
+import { getLoggedInUser } from '../lib/auth'
+
 const Login = ({ history }) => {
 
   const [loginForm, updateLoginForm] = useState({
@@ -60,13 +62,14 @@ const Login = ({ history }) => {
             if (!localStorage) return
             if (!data.token) return
             localStorage.setItem('token', data.token)
-            console.log(localStorage)
-            location.reload()
-            history.push('/browse')
+
+            const currentUser = getLoggedInUser()
+
+            history.push(`/profile/${currentUser.sub}`)
           })
           .catch(err => console.log(err.response))
       },
-      classes: ['button is-success']
+      classes: ['button is-success addOn']
     }
   }
 

@@ -57,7 +57,6 @@ export default function Booking({ match, location}) {
     axios.request(axiosConfig).then(({ data }) => {
       console.log(data)
     })
-
   }
 
   return (

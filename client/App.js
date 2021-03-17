@@ -18,7 +18,7 @@ import Inbox from './containers/inbox'
 import Item from './containers/item'
 import Booking from './containers/booking'
 import NavBar from './components/navbar'
-import Footer from './components/footer'
+// import Footer from './components/footer'
 
 import { ThreadProvider } from './contexts/ThreadProvider'
 import { SocketProvider } from './contexts/SocketProvider'

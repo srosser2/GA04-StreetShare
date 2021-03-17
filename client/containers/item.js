@@ -25,11 +25,11 @@ const Item = ({ match, history }) => {
     return <h1>Item not found</h1>
   }
 
-  return <div className={'container'}>
+  return <div className={'container'} style={{ maxWidth: '720px'}}>
     <h1>{results.title}</h1>
     <p>{results.description}</p>
-    <div className={'image is-16by9 is-fullwidth'}>
-      <img src={results.image} alt={results.title} className={''}/>
+    <div>
+      <img src={results.image} alt={results.title} className={''} style={{ objectFit: 'contain', width: '400px', height: '400px'}}/>
     </div>
     <div>
       <button onClick={() => console.log('Contact the owner - redirect to inbox')}>Contact owner</button>

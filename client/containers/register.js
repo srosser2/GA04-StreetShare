@@ -109,7 +109,7 @@ const Register = () => {
           })
           .catch(err => console.log(err.response))
       },
-      classes: ['button is-success']
+      classes: ['button is-success addOn']
     }
   }
 
