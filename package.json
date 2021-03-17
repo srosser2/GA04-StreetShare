@@ -8,7 +8,7 @@
     "seed": "pipenv run python backend/seed.py",
     "build": "pipenv install; npm i; webpack -p",
     "serve:react": "webpack-dev-server",
-    "serve:flask": "pipenv run flask run"
+    "start": "pipenv run python server/setup.py"
   },
   "author": "",
   "license": "ISC",
