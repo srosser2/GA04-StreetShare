@@ -7,6 +7,7 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps"
+import Geocode from 'react-geocode'
 import mapStyle from '../styles/mapStyle'
 import Geocode from 'react-geocode'
 
