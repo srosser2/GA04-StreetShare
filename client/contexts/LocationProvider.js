@@ -18,6 +18,7 @@ export const LocationProvider = ({ children }) => {
       (res) => {
         const { lat, lng } = res.results[0].geometry.location
         console.log(lat, lng)
+        return { lat, lng }
       },
       (err) => {
         console.log(err)

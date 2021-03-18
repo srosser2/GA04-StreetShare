@@ -293,7 +293,7 @@ const Profile = ({ match, location }) => {
 
       <div className={'profile-title-section'}>
         <h1>{results.firstName} {results.lastName}</h1>
-        <h2>{results.address}</h2>
+        <h2>{results.city}</h2>
       </div>
       <div className={'profile-body-container'}>
 

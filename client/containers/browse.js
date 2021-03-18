@@ -9,7 +9,7 @@ const Browse = ({ history }) => {
 
   const [items, updateItems] = useState([])
   const [users, updateUser] = useState([])
-  const [toggle, updateToggle] = useState(true)
+  const [toggle, updateToggle] = useState(false)
   const [sideCard, revealSideCard] = useState(false)
   const [selectedItem, updateselectedItem] = useState({
     id: '',
