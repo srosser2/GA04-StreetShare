@@ -6,9 +6,9 @@ import {
   GoogleMap,
   Marker,
   InfoWindow
-} from "react-google-maps" 
-import Geocode from 'react-geocode'
+} from "react-google-maps"
 import mapStyle from '../styles/mapStyle'
+import Geocode from 'react-geocode'
 
 // ! Search component start here
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
@@ -59,9 +59,6 @@ const MapConfig = () => {
         onSelect={handleSelect}
       >{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className='search-container'>
-          {/* <p>Latitude :{coord.lat}</p>
-          <p>Longitude :{coord.lng}</p> */}
-
           <input className='search-input' {...getInputProps({ placeholder: 'Type address' })} />
           <div>
             {loading ? <div>...loading</div> : null}
