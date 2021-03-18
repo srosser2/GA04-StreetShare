@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import Logo from '../assets/logo_transparent.png'
+import '../styles/logo.scss'
 
 const NavBar = ({ history }) => {
   const [logging, updateLogging] = useState(false)
@@ -21,7 +23,7 @@ const NavBar = ({ history }) => {
 
   return <div className={'navbar-container'}>
     <div className={'navbar-container-left'}>
-      <p>Logo</p>
+      <img className='logo' src={Logo} />
     </div>
     <div className={'navbar-container-right'}>
       <ul className={'nav-links-container'}>
