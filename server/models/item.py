@@ -19,5 +19,5 @@ class Item(db.Model, BaseModel):
     lng = db.Column(db.Float, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
-    bookings = db.relationship(
-        'Booking', backref='items', cascade="all, delete")
+    # bookings = db.relationship(
+    #     'Booking', backref='items', cascade="all, delete")

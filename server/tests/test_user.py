@@ -16,7 +16,7 @@ def test_update_user_by_id_no_token():
     client = app.test_client()
     token = get_login_token()
 
-    updated_user_data = { 'address': '2021 Test Street' }
+    updated_user_data = { 'address1': '2021 Test Street' }
     response = client.put('/api/users/1', data=json.dumps(updated_user_data), content_type='application/json')
     assert response.status_code == 401
 
@@ -24,10 +24,10 @@ def test_update_user_by_id():
     client = app.test_client()
     token = get_login_token()
 
-    updated_user_data = { 'address': '2021 Test Street' }
+    updated_user_data = { 'address1': '2021 Test Street' }
     response = client.put('/api/users/1', data=json.dumps(updated_user_data), content_type='application/json', headers={ 'Authorization': f'Bearer {token}'})
     data_string = response.get_data()
     data = json.loads(data_string)
     assert response.status_code == 200
-    assert data['address'] == '2021 Test Street'
+    assert data['address1'] == '2021 Test Street'
 

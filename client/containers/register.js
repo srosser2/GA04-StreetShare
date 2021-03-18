@@ -55,24 +55,48 @@ const Register = () => {
       },
       dirty: false
     },
-    // confirmPassword: {
-    //   label: 'Confirm Password',
-    //   element: 'input',
-    //   type: 'password',
-    //   placeholder: 'Enter your password',
-    //   value: 'benben',
-    //   validation: {
-    //     required: true,
-    //     minLength: 6
-    //   },
-    //   dirty: false
-    // },
-    address: {
-      label: 'Address',
+    address1: {
+      label: 'Address Line 1',
       element: 'input',
       classes: ['input', 'm-r-5'],
       type: 'text',
       placeholder: 'Enter your address',
+      value: '',
+      validation: {
+        required: true
+      },
+      dirty: false
+    },
+    address2: {
+      label: 'Address Line 2',
+      element: 'input',
+      classes: ['input', 'm-r-5'],
+      type: 'text',
+      placeholder: 'Enter your address',
+      value: '',
+      validation: {
+        required: false
+      },
+      dirty: false
+    },
+    city: {
+      label: 'City',
+      element: 'input',
+      classes: ['input', 'm-r-5'],
+      type: 'text',
+      placeholder: 'Enter your city',
+      value: '',
+      validation: {
+        required: true
+      },
+      dirty: false
+    },
+    postcode: {
+      label: 'Postcode',
+      element: 'input',
+      classes: ['input', 'm-r-5'],
+      type: 'text',
+      placeholder: 'Enter Postcode',
       value: '',
       validation: {
         required: true

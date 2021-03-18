@@ -8,4 +8,4 @@ class MessageSchema(ma.SQLAlchemyAutoSchema):
 		model = Message
 		load_instance = True
 
-	user = ma.Nested('UserSchemaBasic', exclude=('address', 'email', 'password_hash', 'created_at', 'rating'))
+	user = ma.Nested('UserSchemaBasic', exclude=('address1', 'email', 'password_hash', 'created_at', 'rating'))

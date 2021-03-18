@@ -77,6 +77,7 @@ def login():
 @router.route('/users', methods=['GET'])
 def get_users():
     users = User.query.all()
+    print(users)
     return user_schema.jsonify(users, many=True), 200
 
 

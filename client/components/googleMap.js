@@ -13,17 +13,27 @@ import mapStyle from '../styles/mapStyle'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 import '../styles/map.scss'
+import { useLocation } from '../contexts/LocationProvider'
 // ! Search componenet ends here
 
+Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_KEY}`)
+
 const MapConfig = () => {
+
   const [selectedItem, setSelectedItem] = useState(null)
-  const [coordinate, updateCoordinate] = useState([])
+  const [items, updateItems] = useState([])
+
   useEffect(() => {
     axios.get('/api/items')
       .then(axiosResp => {
-        updateCoordinate(axiosResp.data)
+        updateItems(axiosResp.data)
       })
   }, [])
+
+  const { getLocationFromPostcode } = useLocation()
+
+  getLocationFromPostcode('se15 4jz')
+
   // ! Search componenet start here
   const [address, setAddress] = useState('')
   const [coord, setCoord] = useState({
@@ -68,15 +78,15 @@ const MapConfig = () => {
         defaultOptions={{ styles: mapStyle }}
       >
         {
-          coordinate.map((coor, i) => {
+          items.map((item, i) => {
             return <Marker
-              key={coor.lat}
+              key={i}
               position={{
-                lat: coor.lat,
-                lng: coor.lng
+                lat: Number(item.lat),
+                lng: Number(item.lng)
               }}
               onClick={() => {
-                setSelectedItem(coor)
+                setSelectedItem(item)
               }}
             />
           })

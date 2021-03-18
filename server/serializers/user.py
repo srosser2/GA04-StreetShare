@@ -27,4 +27,4 @@ class UserSchemaBasic(ma.SQLAlchemyAutoSchema):
 		# load_instance = True
 	first_name = fields.String(data_key='firstName')
 	last_name = fields.String(data_key='lastName')
-	ma.auto_field('address', hide=True) 
+	ma.auto_field('address1', hide=True) 
