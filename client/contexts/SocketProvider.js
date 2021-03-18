@@ -19,7 +19,11 @@ export const SocketProvider = ({ id, token, children }) => {
   useEffect(() => {
     const newSocket = io(
       `${process.env.HOST}`, // localhost:5000
-      { query: { id, token }}
+      { 
+        query: { id, token },
+        secure: true
+      },
+      
     )
     setSocket(newSocket)
 
