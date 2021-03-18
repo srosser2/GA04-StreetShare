@@ -34,7 +34,7 @@ const Login = ({ history }) => {
       dirty: false
     }
   })
-
+  const [invalidlogin, updateInvalidLogin] = useState(false)
   const handleChange = (e) => {
     const { name, value } = e.target
     const updatedForm = { ...loginForm }
@@ -59,19 +59,19 @@ const Login = ({ history }) => {
         }
         await axios.post('/api/login', formData)
           .then(({ data }) => {
-            if (!localStorage) return
-            if (!data.token) return
+            if (!localStorage) return updateInvalidLogin(true)
+            if (!data.token) return updateInvalidLogin(true)
             localStorage.setItem('token', data.token)
-
             const currentUser = getLoggedInUser()
             history.push(`/profile/${currentUser.sub}`)
+            location.reload()
+
           })
-          .catch(err => console.log(err.response))
+          .catch(err => updateInvalidLogin(true))
       },
       classes: ['button is-success addOn']
     }
   }
-
   return <div >
     <Form
       config={loginForm}
@@ -79,6 +79,8 @@ const Login = ({ history }) => {
       onChange={e => handleChange(e)}
       onSelectChange={handleSelectChange}
     />
+    {invalidlogin && <small className="has-text-danger">Incorrect Login Details, Please Try Again</small>}
+
   </div>
 }
 
