@@ -9,7 +9,7 @@ import {
 } from "react-google-maps"
 import Geocode from 'react-geocode'
 import mapStyle from '../styles/mapStyle'
-import Geocode from 'react-geocode'
+// import Geocode from 'react-geocode'
 
 // ! Search component start here
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
