@@ -11,6 +11,8 @@ export const useThreads = () => {
   return useContext(ThreadContext)
 }
 
+console.log(ThreadContext)
+
 export const ThreadProvider = ({ id, children }) => {
 
   const loggedInUser = getLoggedInUser()
