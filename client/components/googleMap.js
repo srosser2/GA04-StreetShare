@@ -6,7 +6,7 @@ import {
   GoogleMap,
   Marker,
   InfoWindow
-} from "react-google-maps"
+} from "react-google-maps" 
 import Geocode from 'react-geocode'
 import mapStyle from '../styles/mapStyle'
 
@@ -14,9 +14,13 @@ import mapStyle from '../styles/mapStyle'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 import '../styles/map.scss'
+import { useLocation } from '../contexts/LocationProvider'
 // ! Search componenet ends here
 
+Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_KEY}`)
+
 const MapConfig = () => {
+
   const [selectedItem, setSelectedItem] = useState(null)
   const [coordinate, updateCoordinate] = useState([])
   useEffect(() => {
@@ -25,6 +29,11 @@ const MapConfig = () => {
         updateCoordinate(axiosResp.data)
       })
   }, [])
+
+  const { getLocationFromPostcode } = useLocation()
+
+  getLocationFromPostcode('hd9 3xh')
+
   // ! Search componenet start here
   const [address, setAddress] = useState('')
   const [coord, setCoord] = useState({
@@ -74,10 +83,10 @@ const MapConfig = () => {
         {
           coordinate.map((coor, i) => {
             return <Marker
-              key={coor.lat}
+              key={i}
               position={{
-                lat: coor.lat,
-                lng: coor.lng
+                lat: Number(coor.lat),
+                lng: Number(coor.lng)
               }}
               onClick={() => {
                 setSelectedItem(coor)

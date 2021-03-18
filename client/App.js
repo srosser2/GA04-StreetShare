@@ -23,6 +23,7 @@ import NavBar from './components/navbar'
 import { ThreadProvider } from './contexts/ThreadProvider'
 import { SocketProvider } from './contexts/SocketProvider'
 import { FileUploadProvider } from './contexts/FileUploadProvider'
+import { LocationProvider } from './contexts/LocationProvider'
 
 import { getLoggedInUser } from './lib/auth'
 const token = localStorage.getItem('token')
@@ -34,6 +35,8 @@ const loggedInUser = getLoggedInUser()
 
 const App = () => (
   <BrowserRouter>
+            <LocationProvider>
+
         <FileUploadProvider token={token}>
           <NavBar />
           <Switch>
@@ -41,9 +44,9 @@ const App = () => (
             <Route exact path="/register" component={Register} /> */}
             <Route exact path="/register" component={RegisterAndLogin} />
             <Route exact path="/items/:id" component={Item} />
-            <Route exact path='/browse' component={Browse} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/booking" component={Booking} />
+              <Route exact path='/browse' component={Browse} />
             <SocketProvider id={loggedInUser.sub} token={token}>
               <ThreadProvider history={history}>
                 <Route exact path="/inbox" component={Inbox} />
@@ -53,6 +56,8 @@ const App = () => (
           </Switch>
           {/* <Footer /> */}
         </FileUploadProvider>
+            </LocationProvider>
+        
   </BrowserRouter>
 )
 
