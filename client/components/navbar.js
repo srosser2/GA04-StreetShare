@@ -24,6 +24,7 @@ const NavBar = ({ history }) => {
   return <div className={'navbar-container'}>
     <div className={'navbar-container-left'}>
       <img className='logo' src={Logo} />
+      {/* <p>street share</p> */}
     </div>
     <div className={'navbar-container-right'}>
       <ul className={'nav-links-container'}>
