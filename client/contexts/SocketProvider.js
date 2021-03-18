@@ -14,6 +14,7 @@ export const SocketProvider = ({ id, token, children }) => {
 
   const [socket, setSocket] = useState()
 
+  console.log('HOST')
   console.log(process.env.HOST)
 
   useEffect(() => {
