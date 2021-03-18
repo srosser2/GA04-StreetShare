@@ -27,6 +27,16 @@ def generate_bookings(user_list, item_list):
             approval_status=True
         ),
         Booking(
+            owner_id=user_list[3].id,
+            borrower_id=user_list[1].id,
+            item_id=item_list[1].id,
+            start_date=date.today(),
+            end_date=date.today()+timedelta(days=5),
+            owner_decision=True,
+            borrower_decision=True,
+            approval_status=True
+        ),
+        Booking(
             owner_id=user_list[0].id,
             borrower_id=user_list[1].id,
             item_id=item_list[2].id,

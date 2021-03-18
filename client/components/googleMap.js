@@ -21,19 +21,21 @@ Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_KEY}`)
 
 const MapConfig = () => {
 
+  const { getLocationFromPostcode } = useLocation()
+
   const [selectedItem, setSelectedItem] = useState(null)
   const [items, updateItems] = useState([])
 
   useEffect(() => {
     axios.get('/api/items')
-      .then(axiosResp => {
-        updateItems(axiosResp.data)
+      .then(({ data }) => {
+        console.log(data)
+        updateItems(data)
+
       })
   }, [])
 
-  const { getLocationFromPostcode } = useLocation()
 
-  getLocationFromPostcode('se15 4jz')
 
   // ! Search componenet start here
   const [address, setAddress] = useState('')

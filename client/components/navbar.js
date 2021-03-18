@@ -21,7 +21,7 @@ const NavBar = ({ history }) => {
 
   return <div className={'navbar-container'}>
     <div className={'navbar-container-left'}>
-      <p>Logo</p>
+      <p className={'logo'}>Street Share</p>
     </div>
     <div className={'navbar-container-right'}>
       <ul className={'nav-links-container'}>

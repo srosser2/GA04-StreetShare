@@ -14,6 +14,18 @@ user_data = [
         password='samr1234'
     ),
     User(
+        first_name='Yusuf',
+        last_name='Musa',
+        email='yusufm@yusufm.com',
+        address1='15 Brick lane',
+        address2='15 Brick lane',
+        city='London',
+        postcode='E1 6RL',
+        profile_pic='https://res.cloudinary.com/dn39ocqwt/image/upload/v1615860539/ouog25ptmcoxfmdqgrsp.png',
+        rating='good',
+        password='yusufm1234'
+    ),
+    User(
         first_name='Crystel',
         last_name='Osinski',
         email='crystel@gmail.com',
