@@ -7,6 +7,7 @@ import Form from '../components/form'
 import SideDraw from '../components/sideDraw'
 import ItemTab from '../components/profile/itemTab'
 import BookingTab from '../components/profile/bookingTab'
+import BorrowingTab from '../components/profile/borrowingTab'
 
 
 import { getLoggedInUser } from '../lib/auth'
@@ -22,8 +23,8 @@ const Profile = ({ match, location }) => {
   const currentUser = getLoggedInUser()
   const token = localStorage.getItem('token')
 
-  const { loading, results, error } = useAxios({ url: `/api/users/${match.params.id}`, method: 'get' })
-  const { loading: bookingLoading, results: bookingResults, error: bookingError } = useAxios({ url: `/api/users/${match.params.id}/bookings`, method: 'get' })
+  const { loading, results, setResults, error } = useAxios({ url: `/api/users/${match.params.id}`, method: 'get' })
+  const { loading: borrowedItemsLoading, results: borrowedItemsResults, error: borrowedItemsError } = useAxios({ url: `/api/users/${match.params.id}/borrowings`, method: 'get'})
   const { selectedFile, updateSelectedFile, getBase64, fileBase64, uploadImageHandler, fileIsUploading } = useFileUploads()
   const { loading: categoriesLoading, results: categoryResults, error: categoryError } = useAxios({ url: '/api/categories', method: 'get' })
   const [showSideDraw, updateShowSideDraw] = useState(false)
@@ -227,7 +228,9 @@ const Profile = ({ match, location }) => {
         }
 
         axios.request(axiosConfig).then(({ data }) => {
-          console.log(data)
+          const updatedResults = {...results}
+          updatedResults.items.push(data)
+          setResults(updatedResults)
         })
       },
       classes: ['button is-success', 'addOn']
@@ -258,7 +261,8 @@ const Profile = ({ match, location }) => {
       break
     }
     case BORROWING: {
-      tabBody = borrowingTab
+      tabBody = <BorrowingTab borrowedItems={borrowedItemsResults} showSideDrawHandler={updateShowSideDraw} />
+      // console.log(borrowedItemsResults)
       break
     }
     default: {
@@ -276,7 +280,7 @@ const Profile = ({ match, location }) => {
     <div className={'side-menu'}>
       <div className={'side-menu-avatar-container'}>
         <figure className={'side-menu-avatar'}>
-          <img src={results.profilePic} alt={results.lastName} />
+          <img src={results.profilePic && results.profilePic.length > 0 ? results.profilePic : 'https://res.cloudinary.com/dn39ocqwt/image/upload/v1615860539/ouog25ptmcoxfmdqgrsp.png'} alt={results.lastName} />
         </figure>
       </div>
       <div className={'side-menu-nav-container'}>

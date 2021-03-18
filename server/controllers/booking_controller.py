@@ -1,5 +1,6 @@
 from flask import Blueprint, request, g
 from models.booking import Booking
+from models.user import User
 from decorators.secure_route import secure_route
 from marshmallow.exceptions import ValidationError
 
@@ -36,6 +37,16 @@ def create_booking():
     booking.save()
     return booking_schema.jsonify(booking), 200
 
+@router.route('/users/<int:user_id>/borrowings', methods=['GET'])
+def get_user_borrowing_agreements(user_id):
+    bookings = Booking.query.all()
+    user = User.query.get(user_id)
+    borrowed_items = []
+    for booking in bookings:
+        if booking.borrower_id == user.id:
+            borrowed_items.append(booking)
+
+    return booking_schema.jsonify(borrowed_items, many=True), 200
 
 @router.route("/bookings/<int:booking_id>", methods=["PUT"])
 @secure_route

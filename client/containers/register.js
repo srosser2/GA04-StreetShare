@@ -105,7 +105,7 @@ const Register = () => {
         }
         await axios.post('/api/register', formData)
           .then(({ data }) => {
-            // history.push(`/profile/${data.id}`)
+            console.log(data)
           })
           .catch(err => console.log(err.response))
       },
