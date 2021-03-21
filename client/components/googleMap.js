@@ -22,38 +22,88 @@ Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_KEY}`)
 const MapConfig = () => {
 
   const { getLocationFromPostcode } = useLocation()
-
-  const [selectedItem, setSelectedItem] = useState(null)
   const [items, updateItems] = useState([])
-
-  useEffect(() => {
-    axios.get('/api/items')
-      .then(({ data }) => {
-        console.log(data)
-        updateItems(data)
-
-      })
-  }, [])
-
-
-
-  // ! Search componenet start here
-  const [address, setAddress] = useState('')
+  const [selectedItem, setSelectedItem] = useState({})
+  const [selectedLocation, updateSelectedLocation] = useState({})
+  // const [selectedLocation, updateSelectedLocation] = useState({})
+  const [showWindow, updateShowWindow] = useState(false)
+  // const [address, setAddress] = useState('')
   const [coord, setCoord] = useState({
     lat: 51.5073509,
     lng: -0.1277583
   })
 
-  const handleSelect = async (value) => {
-    const result = await geocodeByAddress(value)
-    const latLng = await getLatLng(result[0])
-    setAddress(value)
-    setCoord(latLng)
-  }
+  useEffect(() => {
+    axios.get('/api/items').then(({ data }) => {
+      data.forEach(item => {
+        getLocationFromPostcode(item.postcode).then((res) => {
+          if (res.lat) {
+            item.lat = res.lat
+            item.lng = res.lng
+          }
+        })
+      })
+      console.log(data)
+      updateItems(data)
+    }) 
+      
+  }, [])
+
+  // console.log(items)
+
+  const markers = items.map((item, i) => {
+
+    const onMarkerClick = (e) => {
+      console.log(e)
+      console.log(item)
+      setSelectedItem(item)
+      // setCoord({ lat: item.lat, lng: item.lng })
+    }
+
+
+    if (item.lat) {
+      console.log(item.lat, item.lng)
+      return <Marker
+      key={item.id}
+      position={{
+        lat: item.lat,
+        lng: item.lng
+      }}
+      onClick={e => onMarkerClick(e)}
+    />  
+    }
+    return null
+    
+  })
+
+  let selectedItemWindow
+
+  // if (selectedItem.id) {
+  //   selectedItemWindow = <InfoWindow
+  //     onCloseClick={() => {
+  //         setSelectedItem({});
+  //       }}
+  //       visible={true}
+  //       position={{
+  //         lat: selectedItem.lat,
+  //         lng: selectedItem.lng
+  //       }}><div>{selectedItem.title}</div>
+  //     </InfoWindow>
+  // }
+
+
+  // ! Search componenet start here
+
+  // const handleSelect = async (value) => {
+  //   const result = await geocodeByAddress(value)
+  //   const latLng = await getLatLng(result[0])
+  //   setAddress(value)
+  //   // setCoord(latLng)
+  // }
 
   return (
     <>
-      <PlacesAutocomplete
+      {/* <PlacesAutocomplete
         value={address}
         onChange={setAddress}
         onSelect={handleSelect}
@@ -73,47 +123,18 @@ const MapConfig = () => {
           </div>
         </div>
       )}
-      </PlacesAutocomplete>
+      </PlacesAutocomplete> */}
+
+      <input type='text' placeholder='Postcode' />
 
       <GoogleMap
-        defaultZoom={10}
-        center={coord ? { lat: coord.lat, lng: coord.lng } : { lat: 51.5073509, lng: -0.1277583 }}
+        defaultZoom={15}
+        center={{ lat: coord.lat, lng: coord.lng }}
         defaultOptions={{ styles: mapStyle }}
       >
-        {
-          items.map((item, i) => {
-            return <Marker
-              key={i}
-              position={{
-                lat: Number(item.lat),
-                lng: Number(item.lng)
-              }}
-              onClick={() => {
-                setSelectedItem(item)
-              }}
-            />
-          })
-        }
-        {
-          selectedItem && (
-            <InfoWindow
-              onCloseClick={() => {
-                setSelectedItem(null);
-              }}
-              position={{
-                lat: selectedItem.lat,
-                lng: selectedItem.lng
-              }}
-            >
-              <div style={{ width: '200px' }}>
-                <p>Owner: {selectedItem.firstName + ' ' + selectedItem.lastName}</p>
-                <h2>{selectedItem.address}</h2>
-                <h2>{selectedItem.title}</h2>
-                <p>{selectedItem.description}</p>
-              </div>
-            </InfoWindow>
-          )
-        }
+        {markers}
+        {selectedItemWindow}
+
       </GoogleMap >
     </>
   )

@@ -18,10 +18,11 @@ export const LocationProvider = ({ children }) => {
       const a = await Geocode.fromAddress(postcode)
       return (a.results[0].geometry.location)
     } catch (err) {
-      console.log('old rover')
+
+      console.log(err)
+      return
     }
-    
-    // return a.location
+
   }
 
   const value = {

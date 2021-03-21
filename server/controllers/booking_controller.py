@@ -45,8 +45,6 @@ def get_user_borrowing_agreements(user_id):
     for booking in bookings:
         if booking.borrower_id == user.id:
             borrowed_items.append(booking)
-    print('borrowed_items')
-    print(borrowed_items)
     return booking_schema.jsonify(borrowed_items, many=True), 200
 
 @router.route("/bookings/<int:booking_id>", methods=["PUT"])

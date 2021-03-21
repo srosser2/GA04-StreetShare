@@ -26,20 +26,31 @@ const Item = ({ match, history }) => {
   }
 
   const contactButtons = <div>
-      <button onClick={() => console.log('Contact the owner - redirect to inbox')}>Contact owner</button>
-      <button onClick={() => history.push(`/booking?item=${results.id}`)}>Arrange booking</button>
+      <button className={'btn btn-primary'} onClick={() => console.log('Contact the owner - redirect to inbox')}>Contact owner</button>
+      <button className={'btn'} onClick={() => history.push(`/booking?item=${results.id}`)}>Arrange booking</button>
     </div>
 
-  return <div className={'container'} style={{ maxWidth: '720px'}}>
-    <h1>{results.title}</h1>
-    <p>{results.description}</p>
-    <div>
-      <img src={results.image} alt={results.title} className={''} style={{ objectFit: 'contain', width: '400px', height: '400px'}}/>
+  return <div className={'item-container'}>
+    <div className='item-inner-container'>
+      <div className='item-details'>
+        <h1>{results.title}</h1>
+        <p>{results.postcode}</p>
+        <p>{results.description}</p>
+        <p>{results.note}</p>
+        {results.user_id === currentUser.sub ? 'your stuff': contactButtons}
+      </div>
+
+      <div className={'item-image-container'}>
+        <img src={results.image} alt={results.title} className={''} style={{ objectFit: 'contain', width: '400px', height: '400px'}}/>
+      </div>
+      
     </div>
+   
     
-    <p>{results.note}</p>
+    
+    
 
-    {results.user_id === currentUser.sub ? 'your stuff': contactButtons}
+    
 
   </div>
 }

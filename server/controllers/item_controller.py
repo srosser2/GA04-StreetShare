@@ -1,4 +1,6 @@
 from flask import Blueprint, request, g
+from app import db
+from sqlalchemy import func
 
 router = Blueprint(__name__, 'items')
 
@@ -30,6 +32,12 @@ def get_single_item(item_id):
         return {"message": "Item not found"}, 404
     return item_schema.jsonify(item), 200
 
+@router.route('/items/search/<search_criteria>', methods=['POST'])
+def get_items_by_search_criteria(search_criteria):
+    # search = 
+    items = Item.query.filter(Item.title.ilike(f'%{search_criteria}%')).all()
+    print(items)
+    return item_schema.jsonify(items, many=True), 200
 
 @router.route("/items", methods=["POST"])
 @secure_route

@@ -10,7 +10,6 @@ def test_get_all_items():
     data_string = response.get_data()
     data = json.loads(data_string)
     assert response.status_code == 200
-    print(data)
     
 def test_get_single_item():
     client = app.test_client()

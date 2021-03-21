@@ -13,30 +13,52 @@ export default function ItemTab({ items, showSideDrawHandler, match }) {
   // }
 
 
-  const itemTable = items.map(item => {
-    return <tr key={item.id} className={'table-row'} >
-      <td>
-        <div className={'table-row-item'}>
-          <div className={'table-image-container'}>
-            <img src={item.image} />
-          </div>
-          <p>{item.title}</p>
+  // const itemTable = items.map(item => {
+  //   return <tr key={item.id} className={'table-row'} >
+  //     <td>
+  //       <div className={'table-row-item'}>
+  //         <div className={'table-image-container'}>
+  //           <img src={item.image} />
+  //         </div>
+  //         <p>{item.title}</p>
+  //       </div>
+  //     </td>
+  //     <td>{item.category}</td>
+  //     <td>{item.description}</td>
+  //     <td>Status</td>
+  //   </tr>
+  // })
+
+  const itemCards = items.map(item => {
+    return <div className={'item-card'}>
+      <div className={'item-card-head'}>
+        <div className={'item-card-image'}>
+          <img src={item.image} />
         </div>
-      </td>
-      <td>{item.category}</td>
-      <td>{item.description}</td>
-      <td>Status</td>
-    </tr>
+        
+        <div className={''}>
+          <span class="material-icons">more_vert</span>
+        </div>
+      </div>
+      <div className={'item-card-body'}>
+        <h2>{item.title}</h2>
+        {/* <p>{item.category}</p> */}
+        <div className={'item-card-category'}>
+          <p>Home</p>
+        </div>
+      </div>
+      
+    </div>
   })
 
   return (
   <>
-    <div>
+    <div className={'tab-header'}>
       <h2>My Items</h2>
       {uploadButton}
     </div>
-    <div>
-      <table className={'item-table'}>
+    <div className={'item-card-container'}>
+      {/* <table className={'item-table'}>
         <thead>
           <tr>
             <th>Item</th>
@@ -48,7 +70,8 @@ export default function ItemTab({ items, showSideDrawHandler, match }) {
         <tbody>
           {itemTable}
         </tbody>
-      </table>
+      </table> */}
+      {itemCards}
     </div>
   </>
   )
