@@ -35,7 +35,6 @@ def create_file():
     file_dictionary = request.json
     try:
         cloud_response = upload(file_dictionary['content'], folder=f'/share-app-{os.getenv("FLASK_ENV")}')
-        print(cloud_response)
         file = File(
             url = cloud_response['secure_url'],
             cloud_id = cloud_response['asset_id'],

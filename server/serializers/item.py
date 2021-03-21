@@ -12,3 +12,4 @@ class ItemSchema(ma.SQLAlchemyAutoSchema):
     user_id = fields.Integer(data_key='user_id')
     # category = fields.Nested('CategorySchema')
     category = fields.Integer(data_key='category')
+    postcode = fields.String(data_key='postcode')

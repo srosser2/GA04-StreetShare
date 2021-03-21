@@ -12,7 +12,7 @@ import axios from 'axios'
 import Browse from './containers/browse'
 import Profile from './containers/profile'
 import RegisterAndLogin from './containers/registerAndLogIn'
-// import Login from './containers/login'
+import Home from './containers/home'
 // import Register from './containers/register'
 import Inbox from './containers/inbox'
 import Item from './containers/item'
@@ -24,42 +24,44 @@ import { ThreadProvider } from './contexts/ThreadProvider'
 import { SocketProvider } from './contexts/SocketProvider'
 import { FileUploadProvider } from './contexts/FileUploadProvider'
 import { LocationProvider } from './contexts/LocationProvider'
+// import history from './lib/history'
+
+import { useHistory } from "react-router-dom";
 
 import { getLoggedInUser } from './lib/auth'
 const token = localStorage.getItem('token')
 
 
-// ! Some starter code for your frontend, change this
-// ! however you like.
+
 const loggedInUser = getLoggedInUser()
 
-const App = () => (
-  <BrowserRouter>
-            <LocationProvider>
+const App = () => {
+
+ return<BrowserRouter history={history}>
+      <LocationProvider>
 
         <FileUploadProvider token={token}>
-          <NavBar />
+          <NavBar history={history} />
           <Switch>
-            {/* <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} /> */}
+            <Route exact path="/" component={Home} />
             <Route exact path="/register" component={RegisterAndLogin} />
             <Route exact path="/items/:id" component={Item} />
-            <Route exact path="/profile/:id" component={Profile} />
+            {/* <Route exact path="/profile/:id" component={Profile} /> */}
             <Route exact path="/booking" component={Booking} />
-              <Route exact path='/browse' component={Browse} />
+            <Route exact path='/browse' component={Browse} history={history} />
             <SocketProvider id={loggedInUser.sub} token={token}>
               <ThreadProvider history={history}>
                 <Route exact path="/inbox" component={Inbox} />
+                <Route exact path="/profile/:id" component={(routerProps) => <Profile {...routerProps}/>} />
               </ThreadProvider>
             </SocketProvider>
-            
           </Switch>
           {/* <Footer /> */}
         </FileUploadProvider>
-            </LocationProvider>
+      </LocationProvider>
         
   </BrowserRouter>
-)
+}
 
 
 export default App
