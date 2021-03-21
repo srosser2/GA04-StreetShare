@@ -3,11 +3,15 @@ import { useThreads } from '../contexts/ThreadProvider'
 import blankAvatar from '../assets/blank-avatar.png'
 import { getLoggedInUser } from '../lib/auth'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router';
 
-export default function Threads({ history }) {
+function Threads({ history }) {
   
   const loggedInUser = getLoggedInUser()
   const token = localStorage.getItem('token')
+  
+  console.log('history threads')
+  console.log(history)
 
   if (!loggedInUser) {
     return <div>Please Log In</div>
@@ -28,7 +32,7 @@ export default function Threads({ history }) {
       key={thread.id}
       className={classes.join(' ')} 
       onClick={() => {
-        history.push(`/inbox?thread=${thread.id}`)
+        history.push(`/profile/${loggedInUser.sub}?tab=inbox&thread=${thread.id}`)
         const params = new URLSearchParams(location.search)
         const t = Number(params.get('thread'))
         updateSelectedThreadId(t)
@@ -50,3 +54,5 @@ export default function Threads({ history }) {
     </div>
   )
 }
+
+export default withRouter(Threads)

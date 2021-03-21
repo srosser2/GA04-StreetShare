@@ -1,9 +1,22 @@
-$light-grey: #f3f3f4;
-
+@import 'global';
 
 .page-title {
   font-size: 32px;
   margin: 10px;
+}
+
+.btn {
+  padding: 14px 22px;
+  font-size: 16px;
+  margin-right: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  // font-family: 
+}
+.btn-primary {
+  background-color: #3273dc;
+  color: #fff;
 }
 
 // Navbar
@@ -15,6 +28,16 @@ $light-grey: #f3f3f4;
 
 .navbar-container li {
   margin-left: 20px;
+}
+
+.navbar-container-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .logo {
+    color: black;
+    margin-right: 40px;
+  }
 }
 
 // Card
@@ -177,3 +200,116 @@ label {
   display: block;
   margin: 10px 0;
 }
+
+
+.search-bar-container {
+  font-size: 20px;
+  padding: 16px 16px;
+  background-color: $light-grey;
+  height: 40px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  input {
+    font-family: 'Rubik';
+    font-size: 16px;
+    border: none;
+    background-color: $light-grey;
+  }
+  input:focus,
+  input:active, {
+    outline: none;
+  }
+  .postcode-search input {
+    max-width: 120px;
+    margin-right: 5px;
+  }
+  .search-input {
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+  .search-icon {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  #hero {
+    height: calc(100vh - 60px);
+    width: 100vw;
+    display: flex;
+    justify: center;
+    align-items: center;
+  }
+  .tag-line-container {
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .logo-font {
+      font-family: $logo-font;
+    }
+    .tag-line-content {
+      display: flex;
+      width: 70%;
+      h1 {
+        font-size: 40px;
+      }
+    }
+    
+  }
+  .hero-image-container {
+    width: 50vw;
+    img {
+    }
+  }
+  
+}
+
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 60px);
+}
+
+.item-container {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .item-inner-container {
+    display: flex;
+    width: 70%;
+    
+    .item-image-container {
+      flex-basis: 1;
+      // width: 100%;
+      margin-left: 50px;
+    }
+    .item-details {
+      flex-basis: 1;
+      width: 50%;
+      h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 18px;
+        margin-bottom: 24px;
+        line-height: 200%;
+      }
+    }
+  }
+}
+

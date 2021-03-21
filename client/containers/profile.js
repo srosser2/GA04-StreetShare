@@ -8,6 +8,7 @@ import SideDraw from '../components/sideDraw'
 import ItemTab from '../components/profile/itemTab'
 import BookingTab from '../components/profile/bookingTab'
 import BorrowingTab from '../components/profile/borrowingTab'
+import Inbox from './inbox'
 
 
 import { getLoggedInUser } from '../lib/auth'
@@ -19,6 +20,7 @@ const Profile = ({ match, location }) => {
   const ITEMS = 'items'
   const BOOKINGS = 'bookings'
   const BORROWING = 'borrowing'
+  const INBOX = 'inbox'
 
   const currentUser = getLoggedInUser()
   const token = localStorage.getItem('token')
@@ -85,6 +87,15 @@ const Profile = ({ match, location }) => {
       validation: {
         required: false
       }
+    },
+    postcode: {
+      label: 'Postcode',
+      element: 'input',
+      type: 'text',
+      value: '',
+      validation: {
+        required: false
+      }
     }
   })
   const [currentTab, updateCurrentTab] = useState('items')
@@ -139,6 +150,11 @@ const Profile = ({ match, location }) => {
       img: "https://img.icons8.com/dusk/30/000000/cancel-subscription.png",
       label: ' My Borrowing Agreements',
       link: `/profile/${match.params.id}?tab=${BORROWING}`
+    },
+    {
+      img: "https://img.icons8.com/dusk/30/000000/cancel-subscription.png",
+      label: 'Inbox',
+      link: `/profile/${match.params.id}?tab=${INBOX}`
     }
   ]
 
@@ -267,6 +283,11 @@ const Profile = ({ match, location }) => {
       // console.log(borrowedItemsResults)
       break
     }
+    case INBOX: {
+      tabBody = <Inbox history={history} match={match}/>
+      // console.log(borrowedItemsResults)
+      break
+    }
     default: {
       tabBody = <ItemTab items={results.items} showSideDrawHandler={updateShowSideDraw} match={match} />
     }
@@ -291,10 +312,10 @@ const Profile = ({ match, location }) => {
     </div>
     <div className={'profile-main-container'}>
 
-      <div className={'profile-title-section'}>
+      {/* <div className={'profile-title-section'}>
         <h1>{results.firstName} {results.lastName}</h1>
         <h2>{results.city}</h2>
-      </div>
+      </div> */}
       <div className={'profile-body-container'}>
 
         {tabBody}

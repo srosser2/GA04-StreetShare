@@ -1,11 +1,17 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Map from '../components/googleMap'
+import GMap from '../components/gMap'
 import Footer from '../components/footer'
+import Search from '../components/search'
+import { getLocationFromPostcode } from '../contexts/LocationProvider'
+import { useLocation } from 'react-router-dom'
 
 // import 'bulma'
 
 const Browse = ({ history }) => {
+
+  const location = useLocation()
 
   const [items, updateItems] = useState([])
   const [users, updateUser] = useState([])
@@ -21,6 +27,18 @@ const Browse = ({ history }) => {
     user_id: '',
     bookings: ''
   })
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+
+    console.log('location updated')
+
+    axios.post(`/api/items/search/${params.get('search')}`).then(({ data }) => {
+      updateItems(data)
+    })
+  }, [location, history])
+
+  // console.log(items)
 
   function handleSelectedItem({ id, title, category, note, image, user_id, bookings }) {
     const itemDetails = {
@@ -49,14 +67,43 @@ const Browse = ({ history }) => {
       }))
   }, [])
 
+  useEffect(() => {
+    console.log(selectedItem)
+  }, [selectedItem])
+
+  const updateMarkerById = (id) => {
+    const item = items.find(item => item.id === id)
+    console.log(item)
+    updateselectedItem(item)
+  }
+
+  // const searchSubmitHandler = (e) => {
+  //   e.preventDefault()
+  //   if (e.target.children[0].value.length <= 0) return
+  //   const query = e.target.children[0].value
+  //   history.push(`/browse?search=${query}`)
+  // }
+
+   if(items.length > 0) {
+     console.log(items)
+   }
+   
+
   return (
     <>
-      <main>
+      <main style={{ position: 'relative'}}>
+
+      {/* <Search onSearchSubmit={searchSubmitHandler}/> */}
 
         <div className='toggle-container'>
-          <button className='toggle' onClick={() => updateToggle(true)}>Grid</button>
-          <button className='toggle' onClick={() => updateToggle(false)}>Map</button>
+          <button className={ toggle ? 'toggle toggle-selected' : 'toggle'} onClick={() => updateToggle(true)}>
+            <span class="material-icons">grid_view</span>
+          </button>
+          <button className={ !toggle ? 'toggle toggle-selected' : 'toggle'} onClick={() => updateToggle(false)}>
+            <span class="material-icons">map</span>
+          </button>
         </div>
+        
         {toggle ?
           <section className="section">
             <div className="container mb-3">
@@ -112,13 +159,30 @@ const Browse = ({ history }) => {
             </div>
           </section>
           :
-          <Map
-            latAndLng={
-              items.map((corrdinat) => {
-                return { lat: corrdinat.lat, lng: corrdinat.lng }
-              })
-            }
-          />
+          // <Map
+          //   latAndLng={
+          //     items.map((corrdinat) => {
+          //       return { lat: corrdinat.lat, lng: corrdinat.lng }
+          //     })
+          //   }
+          // />
+          <section className={'map-container'}>
+
+            <GMap 
+              markers={items} 
+              selectedItem={selectedItem}
+              markerCallback={(markerId) => updateMarkerById(markerId)}
+              config={{  
+                zoom: 13,
+                center: { 
+                  lat: items.length > 0 ? items[0].lat : 51.4794807434082, 
+                  lng: items.length > 0 ? items[0].lng : -0.14235636591911316 
+                  }
+                }}
+              />
+          
+          </section>
+          
         }
       </main >
       <Footer />

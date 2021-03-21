@@ -13,17 +13,16 @@ Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_KEY}`)
 
 export const LocationProvider = ({ children }) => {
 
-  const getLocationFromPostcode = (postcode) => {
-    const latLong = Geocode.fromAddress(postcode).then(
-      (res) => {
-        const { lat, lng } = res.results[0].geometry.location
-        console.log(lat, lng)
-        return { lat, lng }
-      },
-      (err) => {
-        console.log(err)
-      }
-    )
+  const getLocationFromPostcode = async (postcode) => {
+    try {
+      const a = await Geocode.fromAddress(postcode)
+      return (a.results[0].geometry.location)
+    } catch (err) {
+
+      console.log(err)
+      return
+    }
+
   }
 
   const value = {

@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Rubik&display=swap');
+
+$primary-font: 'Rubik';
+$logo-font: 'Abril Fatface';
 
 body {
   margin: 0;
@@ -6,6 +12,11 @@ body {
 
 body * {
   box-sizing: border-box;
-  font-family: 'Karla', sans-serif;
+  font-family: $primary-font, sans-serif;
   line-height: 160%;
+}
+
+.logo {
+  font-family: $logo-font, cursive;
+  font-weight: 700;
 }
