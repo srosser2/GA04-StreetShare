@@ -206,7 +206,7 @@ There are several improvements to be made here, but having the markers render fr
 * Due to lack of time I did not have time to allow users to initiate new chats. I am hoping to release an update for this by May 2021. 
 * If there are multiple items at the same postcode, they overlap and only one item can be seen. 
 
-##Wins
+## Wins
 
 * Implementing Socket.IO was a challenge, and although there are currently some issues with the functionality, it was good to work with this technology and get the real time chat feature working.
 * I worked with some more advanced features of React Hooks in this project and found them to be really helpful in organising the code more effectively.
